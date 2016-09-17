@@ -1,0 +1,63 @@
+@function px($px) {
+  @return pxMedia($px, phonePortrait);
+}
+
+@media #{$phonePortrait} {
+  @import 'phonePortrait.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, phoneLandscape);
+}
+
+@media #{$phoneLandscape} {
+  @import 'phoneLandscape.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, tabletPortrait);
+}
+
+@media #{$tabletPortrait} {
+  @import 'tabletPortrait.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, tabletLandscape);
+}
+
+@media #{$tabletLandscape} {
+  @import 'tabletLandscape.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, desktop);
+}
+
+@media #{$desktop} {
+  @import 'desktop.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, desktopWide);
+}
+
+@media #{$desktopWide} {
+  @import 'desktopWide.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, desktopHD);
+}
+
+@media #{$desktopHD} {
+  @import 'desktopHD.scss';
+}
+
+@function px($px) {
+  @return pxMedia($px, desktopMega);
+}
+
+@media #{$desktopMega} {
+  @import 'desktopMega.scss';
+}

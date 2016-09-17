@@ -1,0 +1,77 @@
+& {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60px;
+  // margin: -60px 0 0;
+  border-top: 1px solid #c3c3c3;
+  background: #f9f9f9;
+
+  a {
+    margin: px(20) 0 0;
+    min-height: 0;
+    color: #979797;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: px(20);
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    // line-height: 60px;
+    // height: 60px;
+
+    svg {
+      height: auto;
+      margin: 0 auto px(20);
+    }
+
+    span {
+      display: block;
+    }
+
+    &:hover {
+      color: #30a3fe;
+
+      svg {
+        path {
+          fill: #30a3fe;
+        }
+      }
+    }
+  }
+
+  .tests {
+    svg {
+      width: px(40);
+      height: px(32);
+    }
+  }
+
+  .search {
+    svg {
+      width: px(40);
+      height: px(30);
+    }
+  }
+
+  .account {
+    margin-top: px(15);
+    svg {
+      width: px(40);
+      height: px(40);
+      margin: 0 auto px(15);
+    }
+  }
+
+  .active {
+    color: #30a3fe;
+    
+    svg {
+      path {
+        fill: #30a3fe;
+      }
+    }
+  }
+}

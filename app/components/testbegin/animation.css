@@ -1,0 +1,9 @@
+.testbegin-appear {
+  opacity: 0.01;
+}
+
+.testbegin-appear.testbegin-appear-active {
+  opacity: 1;
+  transition: opacity .8s ease-in;
+}
+

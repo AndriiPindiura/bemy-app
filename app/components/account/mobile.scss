@@ -1,0 +1,115 @@
+& {
+  min-height: 100vh;
+  padding: px(64) 0 px(20);
+  background: $backgroundColor;
+  color: $headerColor;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  header {
+    display: flex;
+    position: relative;
+    width: 100%;
+
+    svg {
+      position: absolute;
+      margin: 0 0 0 px(36);
+
+      &:hover {
+        .arrow {
+          fill: $buttonBackgroundColor;
+        }
+      }
+    }
+
+    figure {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: px(300);
+      margin: 0 auto;
+      // position: relative;
+      // left: 50%;
+      // // margin-left: px(-150);
+      
+      div {
+        width: px(200);
+        height: px(228);
+        margin: 0 0 px(36);
+        border: 2px solid $buttonBackgroundColor;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          display: block;
+          // width: px(200);
+          // height: px(228);
+          margin: 0 auto;
+        }
+      }
+
+      figcaption {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+        h3 {
+          font-size: px(30);
+          text-align: center;
+        }
+
+        span {
+          display: block;
+          color: #757575;
+          font-size: px(26);
+          text-align: center;
+        }
+      }
+    }
+
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    margin: px(52) 0 0;
+
+    div {
+      margin: 0 px(36);
+      padding: px(40) px(38) px(30) px(40);
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+
+      h2 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: px(30);
+      }
+
+      p {
+        margin: px(18) 0 0;
+        color: #1c1d26;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: px(26);
+      }
+    }
+
+    a {
+      margin: px(40) 0 px(10);
+      color: $buttonBackgroundColor;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: px(24);
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    button {
+      line-height: 44px;
+      margin: px(10) px(60) px(46);
+      border: 0;
+      border-radius: px(16);
+      background: $buttonBackgroundColor;
+      color: #fff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: px(28);
+    }
+  }
+}

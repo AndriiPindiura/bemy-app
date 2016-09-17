@@ -1,0 +1,96 @@
+& {
+  min-height: 100vh;
+  padding: px(64) 0 px(20);
+  background: $backgroundColor;
+  color: $headerColor;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  header {
+    display: flex;
+    position: relative;
+    width: 100%;
+
+    svg {
+      position: absolute;
+      margin: 0 0 0 px(36);
+
+      &:hover {
+        .arrow {
+          fill: $buttonBackgroundColor;
+        }
+      }
+    }
+
+    figure {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: px(300);
+      margin: 0 auto;
+      // position: relative;
+      // left: 50%;
+      // // margin-left: px(-150);
+      figcaption {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+        h3 {
+          font-size: px(30);
+          text-align: center;
+        }
+
+        span {
+          display: block;
+          color: #757575;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    margin: px(52) 0 0;
+
+    div {
+      display: flex;
+      margin: 0 px(36) px(20);
+      border-radius: 3px;
+      background-color: #fff;
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+
+      textarea {
+        display: block;
+        width: 100%;
+        min-height: px(300);
+        max-height: 50vh;
+        margin: px(28) 0 0;
+        padding: px(28) px(24);
+        border: 0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: px(28);
+
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+
+    button {
+      line-height: 44px;
+      margin: px(10) px(60);
+      border: 0;
+      border-radius: px(16);
+      background: $buttonBackgroundColor;
+      color: #fff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: px(28);
+    }
+
+    span {
+      color: $spanEmailColor;
+      font-size: px(20);
+      text-align: center;
+    }
+  }
+}

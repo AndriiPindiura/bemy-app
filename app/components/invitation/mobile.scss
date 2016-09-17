@@ -1,0 +1,100 @@
+& {
+  height: 100vh;
+  background: url('../../theme/images/invitation/img.png');
+  background-size: cover;
+  
+  >div {
+    // min-height: 100vh;
+    height: 100%;
+    padding: px(68) 0 0;
+    // background: rgba(0, 0, 0, .28);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    >div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      >div {
+        display: flex;
+        align-items: center;
+        height: px(77);
+
+        >img {
+          // width: px(70);
+          // height: px(108);
+          margin: 0 0 0 px(76);
+        }
+
+        >h2 {
+          margin: 0 px(12.8);
+          font-family: Lato-Bold;
+          font-size: px(30.72);
+          color: $h1Color;
+          line-height: px(25.6);
+        }
+      }
+
+      >a {
+        align-self: flex-start;
+        margin: px(24) px(50) 0 0;
+        color: $linkColor;
+        font-family: 'Lato', sans-serif;
+        font-size: px(24);
+        font-weight: normal;
+        line-height: px(24);
+        text-decoration: none;
+      }
+    }
+
+    h1 {
+      flex-grow: 2;
+      max-width: px(418);
+      // height: px(156);
+      margin: px(95.57) px(26) 0 px(76);
+      // text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+      color: $h1Color;
+      font-family: 'Lato-Light';
+      font-style: italic;
+      font-size: px(51);
+      font-weight: normal;
+      line-height: px(80);
+      // text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    }
+    footer {
+      display: flex;
+      flex-direction: column;
+      // align-items: flex-end;
+      justify-content: flex-end;
+      min-height: px(402.77);
+      background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 16%, #FFFFFF 68%, #FFFFFF 100%);
+      
+      a {
+        display: block;
+        line-height: px(75.09);
+        margin: 0 px(42.66) px(51.2);
+        border-left: 2px solid $linkColor;
+        border-right: 2px solid $buttonGradientStop;
+        background-image: linear-gradient(90deg, $linkColor, $buttonGradientStop), linear-gradient(90deg, $linkColor, $buttonGradientStop);
+        background-size: 100% 2px;
+        background-position: 0 0, 0 100%;
+        background-repeat: no-repeat;
+        // -webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00)) 21 30 30 21 repeat repeat;
+        // border-image: -webkit-gradient(linear, left top, right bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00)) 21 30 30 21 repeat repeat;
+        // border-image: -webkit-gradient(linear, left top, right bottom, from($linkColor), to($buttonGradientStop), color-stop(0.5, #fff), color-stop(0.5, $buttonGradientStop)) 21 30 30 21 repeat repeat;
+        // background-image: linear-gradient(to right, $linkColor 0%, $buttonGradientStop 100%), linear-gradient(to right, $linkColor 0%, $buttonGradientStop 100%);
+        border-radius: px(14);
+        // box-sizing: border-box;
+        // background: #30a3fe;
+        color: $linkColor;
+        font-family: 'Lato', sans-serif;
+        font-size: px(30.72);
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+      }
+    }
+  }
+}
