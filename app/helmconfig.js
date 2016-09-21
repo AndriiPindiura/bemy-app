@@ -13,7 +13,7 @@
 import chromecon from './images/chrome-ninja192-precomposed.png';
 import applecon from './images/apple-ninja152-precomposed.png';
 import mscon from './images/ms-ninja144-precomposed.png';
-import favicon from './images/bemy.png';
+import favicon from './images/favNew.png';
 
 const config = {
   link: [

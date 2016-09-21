@@ -1,0 +1,27 @@
+& {
+  padding: 0 px(42.66) px(51.2);
+
+  a {
+    display: block;
+    @include gradientBorder(2px, px(13.65));
+    // border-left: 2px solid $linkColor;
+    // border-right: 2px solid $buttonGradientStop;
+    // background-image: linear-gradient(90deg, $linkColor, $buttonGradientStop), linear-gradient(90deg, $linkColor, $buttonGradientStop);
+    // background-size: 100% 2px;
+    // background-position: 0 0, 0 100%;
+    // background-repeat: no-repeat;
+    // border-radius: px(13.65);
+    color: $linkColor;
+    font-family: Lato-Semibold;
+    font-size: px(30.72);
+    // font-weight: 500;
+    // font-weight: bold;
+    line-height: px(75.09);
+    text-align: center;
+    text-decoration: none;
+  }
+  .disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+}

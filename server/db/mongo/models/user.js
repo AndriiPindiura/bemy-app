@@ -16,6 +16,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
   tokens: Array,
+  admin: { type: Boolean, default: false },
+  tested: { type: Boolean, default: true },
   profile: {
     displayName: { type: String, default: '' },
     firstName: { type: String, default: '' },

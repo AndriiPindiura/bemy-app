@@ -56,7 +56,7 @@ module.exports = {
            },
           {
             test: /\.scss$/,
-            loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]!sass!postcss-loader'
+            loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader!postcss-loader?parser=postcss-scss'
           }
       ])
     },

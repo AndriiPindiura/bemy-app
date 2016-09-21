@@ -1,4 +1,5 @@
 .hello {
+  @import '../../theme/mixin.scss';
   @import '../../theme/mq';
   @import '../../theme/functions';
   @import 'variables';

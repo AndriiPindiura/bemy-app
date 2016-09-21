@@ -37,25 +37,15 @@ export function setQuestionsByTypeAC(payload) {
 
 export function setQuestionsByType(parameter) {
   return (dispatch) => {
-    const questions = harmony.selectQuestionsByType(parameter);
-    if (questions.length > 0) {
-      dispatch(setQuestionsByTypeAC(questions));
-      dispatch(setCurrentQuestion());
-    }
-    // const ref = firebase.database().ref('socionicQuestions');
-    // ref.orderByChild('type').equalTo(parameter).once('value')
-    //   .then((snapshot) => {
-    //     const questions = [];
-
-    //     for (const question in snapshot.val()) {
-    //       questions.push(snapshot.val()[question]);
-    //       // console.log(question);
-    //     }
-    //     if (questions.length > 0) {
-    //       dispatch(setQuestionsByTypeAC(questions));
-    //       dispatch(setCurrentQuestion());
-    //     }
-    //   });
+    fetch(`http://localhost:3000/api/question/type/${parameter}`, { credentials: 'include' })
+      .then(response => {
+        response.json().then(data => {
+          dispatch(setQuestionsByTypeAC(data));
+        }).catch(err => console.log(err));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 }
 

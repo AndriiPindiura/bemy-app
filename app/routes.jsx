@@ -13,6 +13,7 @@ import PeopleContainer from './containers/PeopleContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import MailContainer from './containers/MailContainer';
 import AccountContainer from './containers/AccountContainer';
+import { getNextQuestion } from './external/harmony';
 
 require('es6-promise').polyfill();
 /*
@@ -48,12 +49,29 @@ export default (store) => {
     // console.log('lets check is user authenticated');
     // console.log(store.getState());
     requireAuth(nextState, replace, callback);
-    fetch('http://localhost:3000/all', { credentials: 'include' })
-      .then(response => { return response.json(); })
-      // .then(json => console.log(json))
-      .catch(error => console.log(error));
-    // console.log('return callback');
-    callback();
+    const test = store.getState().test;
+    // console.log(test);
+    // console.log(test.questions);
+    // console.log(!(test && test.questions));
+    if (!(test && test.questions)) {
+      // store.dispatch({ type: 'TEST_SET_QUESTIONS', payload });
+      // console.log(payload);
+      fetch('http://localhost:3000/api/question/type/0', { credentials: 'include' })
+        .then(response => {
+          // store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: response.json() });
+          // console.log(response.json());
+          response.json().then(data => {
+            // console.log(data);
+            store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+            callback();
+          }).catch(err => console.log(err));
+        })
+        // .then(json => console.log(json))
+        .catch(error => {
+          console.log(error);
+          // callback();
+        });
+    }
   };
 
   const AuthWithParams = props => {

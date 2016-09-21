@@ -6,12 +6,13 @@ import unsupportedMessage from '../db/unsupportedMessage';
 import { controllers, passport as passportConfig } from '../db';
 
 const usersController = controllers && controllers.users;
-const topicsController = controllers && controllers.topics;
+// const topicsController = controllers && controllers.topics;
 const answerController = controllers && controllers.answer;
 const questionController = controllers && controllers.question;
 
 export default (app) => {
   const auth = (req, res, next) => {
+    console.log(req.session);
     // console.log('auth');
     // console.log(req.session);
     // console.log(req.session.passport);
@@ -123,14 +124,14 @@ export default (app) => {
 
 
   // topic routes
-  if (topicsController) {
-    app.get('/topic', topicsController.all);
-    app.post('/topic/:id', topicsController.add);
-    app.put('/topic/:id', topicsController.update);
-    app.delete('/topic/:id', topicsController.remove);
-  } else {
-    console.warn(unsupportedMessage('topics routes'));
-  }
+  // if (topicsController) {
+  //   app.get('/topic', topicsController.all);
+  //   app.post('/topic/:id', topicsController.add);
+  //   app.put('/topic/:id', topicsController.update);
+  //   app.delete('/topic/:id', topicsController.remove);
+  // } else {
+  //   console.warn(unsupportedMessage('topics routes'));
+  // }
   if (answerController) {
     // app.get('/api/answer', (req, res) => {
     //   console.log(req.user);
@@ -148,9 +149,12 @@ export default (app) => {
   if (questionController) {
     app.get('/api/question', questionController.index);
     app.get('/api/question/:id', questionController.show);
+    app.get('/api/question/type/:type', questionController.getQuestionsByType);
     app.post('/api/question/', questionController.create);
+    app.post('/api/question/import', questionController.upload);
     app.put('/api/question/:id', questionController.update);
     app.patch('/api/question/:id', questionController.update);
+    app.delete('/api/question/wipe', questionController.wipe);
     app.delete('/api/question/:id', questionController.destroy);
   } else {
     console.warn(unsupportedMessage('api/question routes'));

@@ -8,6 +8,8 @@
  */
 
 import _ from 'lodash';
+import mongoose from 'mongoose';
+
 import Question from '../models/question';
 
 function respondWithResult(res, statusCode) {
@@ -67,11 +69,11 @@ export function forTest(req, res) {
           text: question.text,
           answers: _.chain(question.answers).shuffle().head().value()
         };
-        console.log(_.shuffle(question.answers)[0]);
+        // console.log(_.shuffle(question.answers)[0]);
         resultQuestions.push(resultQuestion);
         return resultQuestions;
       }, []);
-      console.log(result);
+      // console.log(result);
       return result;
     })
     .then(respondWithResult(res))
@@ -100,6 +102,33 @@ export function create(req, res) {
     .catch(handleError(res));
 }
 
+export function upload(req, res) {
+  // console.log(req.body);
+  const questions = req.body;
+  for (let i = 0, l = questions.length; i < l; i++) {
+    for (let j = 0, a = questions[i].answers.length; j < a; j++) {
+      questions[i].answers[j]._id = mongoose.Types.ObjectId();
+    }
+    Question.create(questions[i]);
+    console.log(questions[i]);
+  }
+  // questions.forEach(question => console.log(question));
+  // const questions = JSON.parse(req.body);
+  // console.log(questions);
+  return res.sendStatus(201);
+  // return Question.create(req.body)
+  //   .then(respondWithResult(res, 201))
+  //   .catch(handleError(res));
+}
+
+export function getQuestionsByType(req, res) {
+  console.log(req.params.type);
+  return Question.find({ socionicType: req.params.type}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Updates an existing Question in the DB
 export function update(req, res) {
   if (req.body._id) {
@@ -120,10 +149,17 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
+export function wipe(req, res) {
+  return Question.remove().then(() => res.sendStatus(204), () => res.sendStatus(500));
+}
+
 export default {
   index,
   show,
   create,
   update,
   destroy,
+  upload,
+  getQuestionsByType,
+  wipe
 };

@@ -1,0 +1,9 @@
+@mixin gradientBorder($width, $radius, $startColor: #51AAEC, $endColor: #A8C835) {
+  border-left: $width solid $startColor;
+  border-right: $width solid $endColor;
+  background-image: linear-gradient(90deg, $startColor, $endColor), linear-gradient(90deg, $startColor, $endColor);
+  background-size: 100% $width;
+  background-position: 0 0, 0 100%;
+  background-repeat: no-repeat;
+  border-radius: $radius;
+}

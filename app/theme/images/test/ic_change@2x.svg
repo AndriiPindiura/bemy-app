@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="22px" viewBox="0 0 30 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_change</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#50AAED" offset="0%"></stop>
+            <stop stop-color="#A8C835" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="App-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Atoms" transform="translate(-151.000000, -2411.000000)">
+            <g id="ic_change" transform="translate(150.000000, 2406.000000)">
+                <path d="M25.3333333,10.6666667 L20,16 L24,16 C24,20.42 20.42,24 16,24 C14.6466667,24 13.38,23.66 12.26,23.0733333 L10.3133333,25.02 C11.9666667,26.0533333 13.9066667,26.6666667 16,26.6666667 C21.8933333,26.6666667 26.6666667,21.8933333 26.6666667,16 L30.6666667,16 L25.3333333,10.6666667 L25.3333333,10.6666667 Z M8,16 C8,11.58 11.58,8 16,8 C17.3533333,8 18.62,8.34 19.74,8.92666667 L21.6866667,6.98 C20.0333333,5.94666667 18.0933333,5.33333333 16,5.33333333 C10.1066667,5.33333333 5.33333333,10.1066667 5.33333333,16 L1.33333333,16 L6.66666667,21.3333333 L12,16 L8,16 L8,16 Z" id="Shape" fill="url(#linearGradient-1)"></path>
+                <polygon id="Shape" points="0 0 32 0 32 32 0 32"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

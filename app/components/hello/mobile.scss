@@ -1,121 +1,102 @@
+// @import '../../theme/mixin.scss';
 & {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
   background-color: $backgroundColor;
+  padding: 5px 0;
+  @include gradientBorder(5px, 0);
 
-  // h3 {
-  //     margin: px(60) 0 0 0; 
-  // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  //     font-size: px(24);
-  //     font-weight: bold;
-  //     text-align: center;
-  //     text-align: center;
-  // }
+  // border-left: 5px solid $linkColor;
+  // border-right: 5px solid $buttonGradientStop;
+  // background-image: linear-gradient(90deg, $linkColor, $buttonGradientStop), linear-gradient(90deg, $linkColor, $buttonGradientStop);
+  // background-size: 100% 5px;
+  // background-position: 0 0, 0 100%;
+  // background-repeat: no-repeat;
+  box-sizing: border-box;
 
-  h1 {
-    margin: px(70) px(60) 0;
-    color: $headerColor;
-    // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-family: Arial;
-    font-size: px(44);
-    font-weight: bold;
-    letter-spacing: 0.4px;
-  }
-
-  h2 {
-    margin: px(30) px(60) 0;
-    color: $headerColor;
-    font-family: Georgia;
-    // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: px(36);
-    font-weight: bold;
-    line-height: 1.27;
-  }
-
-  p {
-    flex-grow: 2;
-    margin: px(82) px(60) 0;
-    font-family: Arial;
-    font-size: px(26);
-    font-weight: normal;
-    line-height: 1.38;
-  }
-
-  div {
+  >div {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0 px(60) px(30);
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 10px);
+    background: url('../../theme/images/invitation/img.png');
+    box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, .95);
+    background-size: cover;
 
-    &>input {
-      display:none;            
-    }
-
-    &>input + label {
+    h1 {
+      margin: px(70) px(60) 0;
       color: $headerColor;
-      font-family: Arial;
+      // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: Lato-Light;
+      font-size: px(51.2);
+      font-style: italic;
+      line-height: px(68.26);
+    }
+
+    h2 {
+      margin: px(30) px(60) 0;
+      color: $headerColor;
+      font-family: Georgia;
+      // font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: px(36);
-      font-weight: normal;
-      line-height: px(48);
-      cursor: pointer;
+      font-weight: bold;
+      line-height: 1.27;
     }
 
-    &>input + label::before {
-      content: '';
-      display: block;
-      float: left;
-      height: px(48);
-      width: px(48);
-      margin: 0 px(10);
-      border-radius: 50%;
-      background:#d8d8d8 url('../../theme/images/hello/ic-checkbox.svg') no-repeat center;
-      background-repeat: no-repeat;
+    p {
+      flex-grow: 2;
+      margin: px(82) px(60) 0;
+      // color: #000000;
+      font-family: Lato;
+      font-size: px(27.3);
+      font-weight: 100;
+      letter-spacing: 0px;
+      line-height: px(37.55);
     }
 
-    &>input:checked + label::before {
-      background:#30a3fe url('../../theme/images/hello/ic-checkbox.svg') no-repeat center;
-    }
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 0 px(60) px(30);
 
-    button {
-      width: 100%;
-      line-height: px(76);
-      margin: px(80) 0 0;
-      border: 0;
-      border-radius: px(14);
-      background: #30a3fe;
-      color: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: px(24);
-      font-weight: 700;
-      opacity: 1;
-    }
+      &>input {
+        display:none;            
+      }
 
-    a {
-      width: 100%;
-      line-height: px(76);
-      margin: px(80) 0 0;
-      border: 0;
-      border-radius: px(14);
-      background: #30a3fe;
-      color: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: px(24);
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      opacity: 1;
-    }
+      &>input + label {
+        color: $headerColor;
+        font-family: Lato;
+        font-size: px(27.3);
+        font-weight: bold;
+        letter-spacing: 0px;
+        line-height: px(51.2);
 
-    .disabled {
-      opacity: .5;
-    }
+        cursor: pointer;
+      }
 
-    button:disabled {
-      opacity: .5;
+      &>input + label::before {
+        content: '';
+        display: block;
+        float: left;
+        width: px(51.2);
+        height: px(51.2);
+        margin: 0 px(26.6) 0 0;
+        border: 3px solid $buttonGradientStop;
+        border-radius: 6px;
+        // background:#d8d8d8 url('../../theme/images/hello/ic-checkbox.svg') no-repeat center;
+        background-repeat: no-repeat;
+      }
+
+      &>input:checked + label::before {
+        background: url('../../theme/images/hello/ic_checkbox.png') no-repeat center;
+      }
+    }
+    footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: px(402.77);
+      // background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 16%, #FFFFFF 68%, #FFFFFF 100%);
     }
   }
-
 }

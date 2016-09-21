@@ -22,7 +22,7 @@
         align-items: center;
         height: px(77);
 
-        >img {
+        >svg {
           // width: px(70);
           // height: px(108);
           margin: 0 0 0 px(76);
@@ -66,35 +66,9 @@
     footer {
       display: flex;
       flex-direction: column;
-      // align-items: flex-end;
       justify-content: flex-end;
       min-height: px(402.77);
       background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 16%, #FFFFFF 68%, #FFFFFF 100%);
-      
-      a {
-        display: block;
-        line-height: px(75.09);
-        margin: 0 px(42.66) px(51.2);
-        border-left: 2px solid $linkColor;
-        border-right: 2px solid $buttonGradientStop;
-        background-image: linear-gradient(90deg, $linkColor, $buttonGradientStop), linear-gradient(90deg, $linkColor, $buttonGradientStop);
-        background-size: 100% 2px;
-        background-position: 0 0, 0 100%;
-        background-repeat: no-repeat;
-        // -webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00)) 21 30 30 21 repeat repeat;
-        // border-image: -webkit-gradient(linear, left top, right bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00)) 21 30 30 21 repeat repeat;
-        // border-image: -webkit-gradient(linear, left top, right bottom, from($linkColor), to($buttonGradientStop), color-stop(0.5, #fff), color-stop(0.5, $buttonGradientStop)) 21 30 30 21 repeat repeat;
-        // background-image: linear-gradient(to right, $linkColor 0%, $buttonGradientStop 100%), linear-gradient(to right, $linkColor 0%, $buttonGradientStop 100%);
-        border-radius: px(14);
-        // box-sizing: border-box;
-        // background: #30a3fe;
-        color: $linkColor;
-        font-family: 'Lato', sans-serif;
-        font-size: px(30.72);
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-      }
     }
   }
 }
