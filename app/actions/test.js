@@ -1,19 +1,11 @@
-import { browserHistory } from 'react-router';
-import { TEST_CHANGE_QUESTION,
+// import { browserHistory } from 'react-router';
+import {
   TEST_DISABLE_CHANGE_QUESTION,
   TEST_NEXT_QUESTION,
   TEST_SET_ANSWER,
   TEST_SET_CURRENT_QUESTION,
   TEST_SET_QUESTIONS,
   TEST_RENEW_QUESTIONS } from '../types';
-// import * as viewActions from './view';
-import * as harmony from '../external/harmony';
-// import * as firebase from 'firebase';
-
-
-export function changeQuestion(payload) {
-  return { type: TEST_CHANGE_QUESTION, payload };
-}
 
 export function disableQuestionChange(payload) {
   return { type: TEST_DISABLE_CHANGE_QUESTION, payload };
@@ -37,7 +29,7 @@ export function setQuestionsByTypeAC(payload) {
 
 export function setQuestionsByType(parameter) {
   return (dispatch) => {
-    fetch(`http://localhost:3000/api/question/type/${parameter}`, { credentials: 'include' })
+    fetch(`/api/question/type/${parameter}`, { credentials: 'include' })
       .then(response => {
         response.json().then(data => {
           dispatch(setQuestionsByTypeAC(data));
@@ -60,12 +52,23 @@ export function renewQuestions(payload) {
   return { type: TEST_RENEW_QUESTIONS, payload };
 }
 
-export function postAnswers() {
+export function postAnswers(payload) {
   return (dispatch) => {
-    dispatch(setQuestionsByType(0));
+    const result = [...payload.result, { question: payload.currentQuestion._id, answers: payload.answers}];
+    console.log(result);
+    // const headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    fetch('/api/answer/', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      // headers,
+      method: 'post',
+      body: JSON.stringify({ answers: result }),
+      credentials: 'include'
+    })
+      .catch(error => console.log(error));
     dispatch(renewQuestions());
-    harmony.postAnswers();
-    browserHistory.push('/result');
-    // dispatch(viewActions.changeView());
   };
 }

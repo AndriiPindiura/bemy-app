@@ -137,11 +137,12 @@ export default (app) => {
     //   console.log(req.user);
     //   res.send('hello');
     // });
-    app.get('/api/answer', auth, answerController.index);
+    app.get('/api/answer', answerController.index);
     app.get('/api/answer/:id', answerController.show);
     app.post('/api/answer/', answerController.create);
     app.put('/api/answer/:id', answerController.update);
     app.patch('/api/answer/:id', answerController.update);
+    app.delete('/api/answer/wipe', answerController.wipe);
     app.delete('/api/answer/:id', answerController.destroy);
   } else {
     console.warn(unsupportedMessage('api/answer routes'));

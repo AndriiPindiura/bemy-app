@@ -1,11 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
 
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
+
 const AnswerSchema = new Schema({
-  userId: { type: Schema.ObjectId, ref: 'User' },
+  user: { type: Schema.ObjectId, ref: 'User' },
   answers: [{
-    questionId: { type: Schema.ObjectId, ref: 'Question' },
-    answer: Number,
+    question: { type: Schema.ObjectId, ref: 'Question' },
+    answers: Array,
   }],
 });
+
+AnswerSchema.plugin(deepPopulate, {});
 
 export default mongoose.model('Answer', AnswerSchema);

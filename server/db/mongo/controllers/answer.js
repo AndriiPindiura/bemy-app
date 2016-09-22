@@ -9,6 +9,8 @@
 
 import _ from 'lodash';
 import Answer from '../models/answer';
+// import User from '../models/user';
+// import Question from '../models/question';
 
 function respondWithResult(res, statusCode) {
   return entity => {
@@ -68,7 +70,12 @@ export function index(req, res) {
 
 // Gets a single Answer from the DB
 export function show(req, res) {
-  return Answer.findById(req.params.id).exec()
+  // .populate('userId').populate('answers:question')
+  return Answer.findById(req.params.id)
+  .deepPopulate('user answers.question')
+    // .populate('user')
+    // .populate('answers:question')
+    .exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -76,7 +83,10 @@ export function show(req, res) {
 
 // Creates a new Answer in the DB
 export function create(req, res) {
-  return Answer.create(req.body)
+  return Answer.create({
+    userId: req.user._id,
+    answers: req.body.answers
+  })
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -101,10 +111,16 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
+export function wipe(req, res) {
+  return Answer.remove().then(() => res.sendStatus(204), () => res.sendStatus(500));
+}
+
+
 export default {
   index,
   show,
   create,
   update,
   destroy,
+  wipe
 };

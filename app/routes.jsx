@@ -56,7 +56,7 @@ export default (store) => {
     if (!(test && test.questions)) {
       // store.dispatch({ type: 'TEST_SET_QUESTIONS', payload });
       // console.log(payload);
-      fetch('http://localhost:3000/api/question/type/0', { credentials: 'include' })
+      fetch('/api/question/type/0', { credentials: 'include' })
         .then(response => {
           // store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: response.json() });
           // console.log(response.json());

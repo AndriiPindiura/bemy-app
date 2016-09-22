@@ -92,10 +92,9 @@ const TestComponent = props => {
               props.test.currentQuestionIndex >= props.test.questionsCount
               ? () => {
                 props.actions.nextQuestion(test.currentQuestionIndex);
-                props.actions.postAnswers();
+                props.actions.postAnswers(test);
               }
-              : (e) => {
-                e.preventDefault();
+              : () => {
                 props.actions.nextQuestion(test.currentQuestionIndex);
               }
             }
