@@ -1,74 +1,67 @@
 & {
   min-height: 100vh;
   padding: px(64) 0 px(20);
-  background: $backgroundColor;
+  // background: $backgroundColor;
+  @include gradientBorder(5px, 0);
   color: $headerColor;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   header {
-    display: flex;
     position: relative;
-    width: 100%;
-
-    svg {
+    
+    button {
       position: absolute;
-      margin: 0 0 0 px(36);
+      margin: 0 0 0 px(34.13);
+      border: 0;
+      background: 0;
+      outline: 0;
+      svg {
 
-      &:hover {
-        .arrow {
-          fill: $buttonBackgroundColor;
+        &:hover {
+          .arrow {
+            fill: $buttonBackgroundColor;
+          }
         }
       }
     }
 
-    figure {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: px(300);
-      margin: 0 auto;
-      // position: relative;
-      // left: 50%;
-      // // margin-left: px(-150);
-      figcaption {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-
-        h3 {
-          font-size: px(30);
-          text-align: center;
-        }
-
-        span {
-          display: block;
-          color: #757575;
-          text-align: center;
-        }
-      }
+    h3 {
+      color: $headerColor;
+      font-family: Lato-Light;
+      font-size: px(40.96);
+      font-weight: 100;
+      font-style: italic;
+      letter-spacing: 0px;
+      // line-height: px(54.61);
+      text-align: center;  
     }
+
   }
 
   main {
     display: flex;
     flex-direction: column;
-    margin: px(52) 0 0;
+    margin: px(34.13) 0 0;
 
     div {
       display: flex;
-      margin: 0 px(36) px(20);
-      border-radius: 3px;
+      margin: 0 px(36) px(25.6);
       background-color: #fff;
-      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+
+      // box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 
       textarea {
         display: block;
         width: 100%;
-        min-height: px(300);
+        min-height: px(360.11);
         max-height: 50vh;
         margin: px(28) 0 0;
         padding: px(28) px(24);
-        border: 0;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: px(28);
+        border: 1px solid $textAreaBorderColor;
+        border-radius: 3px;
+        color: $headerColor;
+        font-family: Lato;
+        font-size: px(27.31);
+        resize: none;
 
         &:focus {
           outline: 0;
@@ -76,20 +69,11 @@
       }
     }
 
-    button {
-      line-height: 44px;
-      margin: px(10) px(60);
-      border: 0;
-      border-radius: px(16);
-      background: $buttonBackgroundColor;
-      color: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: px(28);
-    }
-
     span {
       color: $spanEmailColor;
-      font-size: px(20);
+      font-family: Lato-Light;
+      font-size: px(20.48);
+      font-weight: 100;
       text-align: center;
     }
   }
