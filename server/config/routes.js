@@ -12,7 +12,7 @@ const questionController = controllers && controllers.question;
 
 export default (app) => {
   const auth = (req, res, next) => {
-    console.log(req.session);
+    // console.log(req.session);
     // console.log('auth');
     // console.log(req.session);
     // console.log(req.session.passport);
@@ -108,8 +108,6 @@ export default (app) => {
     );
 
     app.get('/auth/facebook/:id', (req, res, next) => {
-      console.log('with params');
-      console.log(req.params.id);
       passport.authenticate('facebook', {
         scope: ['user_about_me', 'email', 'user_likes', 'user_hometown', 'user_location', 'user_birthday'],
         callbackURL: `/auth/facebook/callback/${req.params.id}`,
@@ -138,6 +136,7 @@ export default (app) => {
     //   res.send('hello');
     // });
     app.get('/api/answer', answerController.index);
+    app.get('/api/answer/check', answerController.check);
     app.get('/api/answer/:id', answerController.show);
     app.post('/api/answer/', answerController.create);
     app.put('/api/answer/:id', answerController.update);

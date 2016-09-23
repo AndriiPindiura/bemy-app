@@ -6,16 +6,17 @@
   justify-content: space-around;
   width: 100%;
   height: 60px;
-  // margin: -60px 0 0;
-  border-top: 1px solid #c3c3c3;
   background: #f9f9f9;
+  @include gradientBorderTop(1px, 0);
+  // margin: -60px 0 0;
+  // border-top: 1px solid #c3c3c3;
 
   a {
     margin: px(20) 0 0;
     min-height: 0;
     color: #979797;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: px(20);
+    font-family: Lato;
+    font-size: px(20.48);
     font-weight: normal;
     text-align: center;
     text-decoration: none;
@@ -36,7 +37,7 @@
 
       svg {
         path {
-          fill: #30a3fe;
+          fill: url(#hover);
         }
       }
     }
@@ -70,7 +71,7 @@
     
     svg {
       path {
-        fill: #30a3fe;
+        fill: url(#hover);
       }
     }
   }

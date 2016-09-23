@@ -83,12 +83,20 @@ export function show(req, res) {
 
 // Creates a new Answer in the DB
 export function create(req, res) {
-  return Answer.create({
-    userId: req.user._id,
-    answers: req.body.answers
-  })
+  // console.log(req.user._id);
+  const answer = new Answer();
+  answer.user = req.user._id;
+  answer.answers = req.body.answers;
+  // console.log(answer);
+  return answer.save()
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
+  // return Answer.create({
+  //   userId: req.user._id,
+  //   answers: req.body.answers
+  // })
+  //   .then(respondWithResult(res, 201))
+  //   .catch(handleError(res));
 }
 
 // Updates an existing Answer in the DB
@@ -111,6 +119,25 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
+export function check(req, res) {
+  console.log(req.user._id);
+  if (!req.user) {
+    return res.sendStatus(403);
+  }
+  // return Answer.findOne({ user: req.user._id})
+  //   .then(user => {
+  //     console.log(user);
+  //     res.sendStatus(200);
+  //   })
+  //   .catch(handleError(res));
+
+
+  return Answer.findOne({ user: req.user._id})
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 export function wipe(req, res) {
   return Answer.remove().then(() => res.sendStatus(204), () => res.sendStatus(500));
 }
@@ -122,5 +149,6 @@ export default {
   create,
   update,
   destroy,
+  check,
   wipe
 };

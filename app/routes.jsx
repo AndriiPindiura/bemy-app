@@ -13,21 +13,19 @@ import PeopleContainer from './containers/PeopleContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import MailContainer from './containers/MailContainer';
 import AccountContainer from './containers/AccountContainer';
-import { getNextQuestion } from './external/harmony';
 
-require('es6-promise').polyfill();
+// require('es6-promise').polyfill();
 /*
  * @param {Redux Store}
  * We require store as an argument here because we wish to get
  * state from the store after it has been authenticated.
  */
 export default (store) => {
+  const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
   const requireAuth = (nextState, replace, callback) => {
-    // console.log(nextState);
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
       replace({
-        // pathname: '/login',
         pathname: `/auth/facebook${nextState.location.pathname}`,
         state: { nextPathname: nextState.location.pathname }
       });
@@ -46,31 +44,32 @@ export default (store) => {
   // };
 
   const requireNewUser = (nextState, replace, callback) => {
-    // console.log('lets check is user authenticated');
-    // console.log(store.getState());
-    requireAuth(nextState, replace, callback);
-    const test = store.getState().test;
-    // console.log(test);
-    // console.log(test.questions);
-    // console.log(!(test && test.questions));
-    if (!(test && test.questions)) {
-      // store.dispatch({ type: 'TEST_SET_QUESTIONS', payload });
-      // console.log(payload);
-      fetch('/api/question/type/0', { credentials: 'include' })
+    if (canUseDOM) {
+      // console.log(window);
+      requireAuth(nextState, replace, callback);
+      fetch('http://localhost:3000/api/answer/check', { credentials: 'include' })
         .then(response => {
-          // store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: response.json() });
-          // console.log(response.json());
-          response.json().then(data => {
-            // console.log(data);
-            store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+          if (response.status !== 404) {
+            replace('/result');
             callback();
-          }).catch(err => console.log(err));
+          }
         })
-        // .then(json => console.log(json))
-        .catch(error => {
-          console.log(error);
-          // callback();
-        });
+        .catch(error => console.log(error));
+      const test = store.getState().test;
+      if (!(test && test.questions)) {
+        fetch('http://localhost:3000/api/question/type/0', { credentials: 'include' })
+          .then(response => {
+            response.json().then(data => {
+              store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+              callback();
+            }).catch(err => console.log(err));
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    } else {
+      callback();
     }
   };
 

@@ -8,6 +8,12 @@ const FooterComponent = props => {
     <nav className={styles.footer}>
       <Link to="/test" className={classNames(styles.tests, props.active === 'test' ? styles.active : null)}>
         <svg viewBox="0 0 20 16">
+          <defs>
+            <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="hover">
+              <stop stopColor="#50AAED" offset="0%" />
+              <stop stopColor="#A8C835" offset="100%" />
+            </linearGradient>
+          </defs>
           <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="nav3" transform="translate(-47.000000, -16.000000)">
               <g id="nav">
@@ -23,6 +29,12 @@ const FooterComponent = props => {
       </Link>
       <Link to="/people" className={classNames(styles.search, props.active === 'people' ? styles.active : null)}>
         <svg viewBox="0 0 20 15">
+          <defs>
+            <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="hover">
+              <stop stopColor="#50AAED" offset="0%" />
+              <stop stopColor="#A8C835" offset="100%" />
+            </linearGradient>
+          </defs>
           <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="nav3" transform="translate(-177.000000, -13.000000)">
               <g id="nav">
@@ -38,6 +50,12 @@ const FooterComponent = props => {
       </Link>
       <Link to="/me" className={classNames(styles.account, props.active === 'me' ? styles.active : null)}>
         <svg viewBox="0 0 20 20">
+          <defs>
+            <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="hover">
+              <stop stopColor="#50AAED" offset="0%" />
+              <stop stopColor="#A8C835" offset="100%" />
+            </linearGradient>
+          </defs>
           <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="nav1" transform="translate(-308.000000, -14.000000)">
               <g id="nav">

@@ -55,7 +55,7 @@ export function renewQuestions(payload) {
 export function postAnswers(payload) {
   return (dispatch) => {
     const result = [...payload.result, { question: payload.currentQuestion._id, answers: payload.answers}];
-    console.log(result);
+    // console.log(result);
     // const headers = new Headers();
     // headers.append('Content-Type', 'application/json');
     fetch('/api/answer/', {

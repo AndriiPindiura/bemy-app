@@ -110,7 +110,7 @@ export function upload(req, res) {
       questions[i].answers[j]._id = mongoose.Types.ObjectId();
     }
     Question.create(questions[i]);
-    console.log(questions[i]);
+    // console.log(questions[i]);
   }
   // questions.forEach(question => console.log(question));
   // const questions = JSON.parse(req.body);
@@ -122,7 +122,7 @@ export function upload(req, res) {
 }
 
 export function getQuestionsByType(req, res) {
-  console.log(req.params.type);
+  // console.log(req.params.type);
   return Question.find({ socionicType: req.params.type}).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

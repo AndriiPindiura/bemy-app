@@ -22,28 +22,25 @@ import ResultComponent from '../components/result';
 //   }
 // }
 
-const ResultContainer = (props) => {
+const ResultContainer = () => {
   return (
     <div>
-      <ResultComponent
-        facebook={props.facebook}
-        people={props.people}
-      />
+      <ResultComponent />
     </div>
   );
 };
 
 
 ResultContainer.propTypes = {
-  facebook: PropTypes.object.isRequired,
-  people: PropTypes.object.isRequired,
+  // facebook: PropTypes.object.isRequired,
+  // people: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   /* Populated by react-webpack-redux:reducer */
   const props = {
-    facebook: state.facebook,
-    people: state.listpeople,
+    // facebook: state.facebook,
+    // people: state.listpeople,
   };
   return props;
 }
