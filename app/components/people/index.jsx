@@ -6,7 +6,9 @@ import styles from './main.scss';
 const PeopleComponent = props => {
   return (
     <section className={styles.listpeople}>
-      <h4>{props.facebook.location}</h4>
+      <header>
+        <h4>{props.facebook.location}</h4>
+      </header>
       <main>
         {props.people.people.map((human, index) => {
           const humanPhoto = (
