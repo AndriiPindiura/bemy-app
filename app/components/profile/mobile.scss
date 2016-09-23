@@ -1,9 +1,9 @@
 & {
   min-height: 100vh;
   padding: px(64) 0 px(20);
-  background: $backgroundColor;
+  // background: $backgroundColor;
   color: $headerColor;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Lato;
 
   header {
     display: flex;
@@ -34,14 +34,21 @@
         font-family: Georgia, 'Times New Roman', Times, serif;
 
         h3 {
-          font-size: px(30);
+          color: $nameColor;
+          font-family: Lato-Light;
+          font-size: px(30.72);
+          font-weight: 100;
+          font-style: italic;
           text-align: center;
         }
 
         span {
           display: block;
-          color: #757575;
+          color: $nameColor;
           text-align: center;
+          font-family: Lato;
+          font-size: px(27.31);
+          font-weight: normal;
         }
       }
     }
@@ -52,66 +59,78 @@
     display: flex;
     flex-direction: column;
     margin: px(52) 0 0;
+    padding: 0 px(17.07);
 
     div {
-      margin: 0 px(36) px(20);
-      padding: px(40) px(38) px(30) px(40);
-      border-radius: 3px;
-      background-color: #fff;
-      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+      margin: 0 0 px(20);
+      padding: px(40) px(49.49) px(30);
+      @include gradientBorderTop(1px, 0);
+      // border-radius: 3px;
+      // background-color: #fff;
+      // box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 
       h2 {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: px(30);
+        font-family: Lato-Light;
+        font-size: px(27.31);
+        font-weight: 100;
+        font-style: italic;
       }
 
       p {
         margin: px(18) 0 0;
-        color: #1c1d26;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: px(26);
+        color: $nameColor;
+        font-size: px(27.31);
+        letter-spacing: 0px;
+        line-height: px(31.13);
       }
     }
 
-    a {
-      line-height: 44px;
-      margin: px(10) px(60) px(46);
-      border: 0;
-      border-radius: px(16);
-      background: $buttonBackgroundColor;
-      color: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: px(28);
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-    }
+
+    // a {
+    //   line-height: 44px;
+    //   margin: px(10) px(60) px(46);
+    //   border: 0;
+    //   border-radius: px(16);
+    //   background: $buttonBackgroundColor;
+    //   color: #fff;
+    //   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    //   font-size: px(28);
+    //   font-weight: bold;
+    //   text-align: center;
+    //   text-decoration: none;
+    // }
   }
 
   footer {
-    margin: 0 px(40);
-    border-top: 1px solid #c3c3c3;
-
-    div {
-      width: 0;
-      height: 0;
-      margin: 0 auto px(18);
-      border-style: solid;
-      border-width: px(15) px(10) 0 px(10);
-      border-color: #c3c3c3 transparent transparent transparent;
-    }
-
-    section {
-      display: flex;
-      justify-content: space-between;
-
-      figure {
-        max-width: px(100);
-
-        img {
-          width: 100%;
-        }
-      }
-    }
+    // margin: 0 px(36);
+    padding: px(39.25) 0 0;
   }
+
+
+  // >footer {
+  //   margin: 0 px(40);
+  //   border-top: 1px solid #c3c3c3;
+
+  //   div {
+  //     width: 0;
+  //     height: 0;
+  //     margin: 0 auto px(18);
+  //     border-style: solid;
+  //     border-width: px(15) px(10) 0 px(10);
+  //     border-color: #c3c3c3 transparent transparent transparent;
+  //   }
+
+  //   section {
+  //     display: flex;
+  //     justify-content: space-between;
+
+  //     figure {
+  //       max-width: px(100);
+
+  //       img {
+  //         width: 100%;
+  //       }
+  //     }
+  //   }
+  // }
 }

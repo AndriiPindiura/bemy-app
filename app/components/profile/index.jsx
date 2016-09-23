@@ -1,7 +1,7 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import deepFreeze from 'deep-freeze';
 import { Link, browserHistory } from 'react-router';
+import BemyButton from '../button';
 import styles from './main.scss';
 
 const ProfileComponent = props => {
@@ -37,11 +37,16 @@ const ProfileComponent = props => {
         {human.about.map((item, index) => {
           return (<div key={index}><h2>{item.question}</h2><p>{item.answer}</p></div>);
         }) }
-        <Link to="/mail">
-          НАПИСАТЬ ПИСЬМО
-        </Link>
+        <div style={{ height: '1px', margin: '0', padding: '0' }} />
       </main>
       <footer>
+        <BemyButton
+          to="/mail"
+          enabled
+          title="Ответить сообщением"
+        />
+      </footer>
+      {/* <footer>
         <div />
         <section>
         {people.map((item, index) => (
@@ -51,7 +56,7 @@ const ProfileComponent = props => {
           )
         ) }
         </section>
-      </footer>
+      </footer>*/}
 
     </section>
   );

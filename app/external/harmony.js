@@ -322,6 +322,7 @@ export const people = [
     photo: require('../theme/images/list-people/0.png'),
     welcome: 'Обычная девчонка с хорошим чувством юмора. А больше и не знаю, что сказать-я себя плохо знаю=)',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
@@ -346,6 +347,7 @@ export const people = [
     photo: require('../theme/images/list-people/1.png'),
     welcome: 'Интересная в общении личность с прекрасными качествами, умеющая понимать, ценить, уважать и требовать этого же в свой адрес! :-)',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
@@ -370,6 +372,7 @@ export const people = [
     photo: require('../theme/images/list-people/2.png'),
     welcome: 'веселая девушка со своими тараканами в голове, люблю бывать в компании своих друзей, а вообще характер у меня сложный.',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
@@ -394,6 +397,7 @@ export const people = [
     photo: require('../theme/images/list-people/3.png'),
     welcome: 'Могу устраивать сцены, но прихожу быстро в себя, никогда не затаиваю злобу, не мщу и не погружаюсь в жалость к себе.',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
@@ -418,6 +422,7 @@ export const people = [
     photo: require('../theme/images/list-people/4.png'),
     welcome: 'Хочу найти того, кто будет трепетно держать меня за руку, пока на экране в кинозале идут ужасы. Ну, конечно, и того, кто, когда совсем уж мясо, готов пожертвовать своим плечом',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
@@ -442,6 +447,7 @@ export const people = [
     photo: require('../theme/images/list-people/5.png'),
     welcome: 'Интересная в общении личность с прекрасными качествами, умеющая понимать, ценить, уважать и требовать этого же в свой адрес! :-)',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
@@ -466,6 +472,7 @@ export const people = [
     photo: require('../theme/images/list-people/6.png'),
     welcome: 'Хочу найти того, кто будет трепетно держать меня за руку, пока на экране в кинозале идут ужасы. Ну, конечно, и того, кто, когда совсем уж мясо, готов пожертвовать своим плечом',
     location: 'Киев',
+    wasCommunicated: false,
     about: [
       {
         question: 'Каково наибольшее достижение вашей жизни?',
