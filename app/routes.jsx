@@ -43,30 +43,55 @@ export default (store) => {
   //   callback();
   // };
 
+  const requireTestPassed = (nextState, replace, callback) => {
+    requireAuth(nextState, replace, callback);
+    if (!store.getState().test.isUserHaveAnswers) {
+      replace('/test');
+      callback();
+    }
+    callback();
+  };
+
   const requireNewUser = (nextState, replace, callback) => {
+    if (store.getState().test.isUserHaveAnswers) {
+      replace('/result');
+      callback();
+    }
     if (canUseDOM) {
       // console.log(window);
-      requireAuth(nextState, replace, callback);
-      fetch('http://localhost:3000/api/answer/check', { credentials: 'include' })
-        .then(response => {
-          if (response.status !== 404) {
-            replace('/result');
-            callback();
-          }
-        })
-        .catch(error => console.log(error));
       const test = store.getState().test;
-      if (!(test && test.questions)) {
-        fetch('http://localhost:3000/api/question/type/0', { credentials: 'include' })
-          .then(response => {
-            response.json().then(data => {
-              store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+      requireAuth(nextState, replace, callback);
+      if (test.isUserHaveAnswers === undefined) {
+        fetch('/api/answer/check', { credentials: 'include' })
+          .then(responseUserAnswers => {
+            if (responseUserAnswers.status !== 404) {
+              store.dispatch({ type: 'TEST_SET_USERANSWER', payload: true });
+              replace('/result');
+              console.log('redirect to result');
               callback();
-            }).catch(err => console.log(err));
+            } else {
+              store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });
+              fetch('/api/question/types', { credentials: 'include' })
+                .then(responseQuestionsTypes => {
+                  responseQuestionsTypes.json().then(dataQuestionsTypes => {
+                    store.dispatch({ type: 'TEST_SET_QUESTIONSTYPES', payload: dataQuestionsTypes });
+                    // console.log(store.getState().test.questionsTypes);
+                    fetch(`/api/question/type/${store.getState().test.questionsTypes[test.currentQuestionIndex]}`,
+                      { credentials: 'include' })
+                      .then(responseQuestions => {
+                        responseQuestions.json().then(data => {
+                          store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+                          callback();
+                        }).catch(errrorJSON => console.log(errrorJSON));
+                      })
+                      .catch(errorQuestions => console.log(errorQuestions));
+                    // callback();
+                  }).catch(errorJSON => console.log(errorJSON));
+                })
+                .catch(errorQuestionsTypes => console.log(errorQuestionsTypes));
+            }
           })
-          .catch(error => {
-            console.log(error);
-          });
+          .catch(errorUserAnswers => console.log(errorUserAnswers));
       }
     } else {
       callback();
@@ -88,10 +113,10 @@ export default (store) => {
       <Route path="hello" component={HelloContainer} />
       <Route path="testbegin" component={TestBeginContainer} onEnter={requireAuth} />
       <Route path="test" component={TestContainer} onEnter={requireNewUser} />
-      <Route path="result" component={ResultContainer} onEnter={requireAuth} />
-      <Route path="people" component={PeopleContainer} onEnter={requireAuth} />
-      <Route path="profile" component={ProfileContainer} onEnter={requireAuth} />
-      <Route path="mail" component={MailContainer} onEnter={requireAuth} />
+      <Route path="result" component={ResultContainer} onEnter={requireTestPassed} />
+      <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
+      <Route path="profile" component={ProfileContainer} onEnter={requireTestPassed} />
+      <Route path="mail" component={MailContainer} onEnter={requireTestPassed} />
       <Route path="me" component={AccountContainer} onEnter={requireAuth} />
     </Route>
   );

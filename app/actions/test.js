@@ -5,6 +5,7 @@ import {
   TEST_SET_ANSWER,
   TEST_SET_CURRENT_QUESTION,
   TEST_SET_QUESTIONS,
+  TEST_SET_USERANSWER,
   TEST_RENEW_QUESTIONS } from '../types';
 
 export function disableQuestionChange(payload) {
@@ -28,6 +29,7 @@ export function setQuestionsByTypeAC(payload) {
 }
 
 export function setQuestionsByType(parameter) {
+  console.log(parameter);
   return (dispatch) => {
     fetch(`/api/question/type/${parameter}`, { credentials: 'include' })
       .then(response => {
@@ -43,7 +45,7 @@ export function setQuestionsByType(parameter) {
 
 export function nextQuestion(parameter) {
   return (dispatch) => {
-    dispatch(setQuestionsByType(parameter));
+    dispatch(setQuestionsByType(parameter + 1));
     dispatch(nextQuestionAC());
   };
 }
@@ -70,5 +72,6 @@ export function postAnswers(payload) {
     })
       .catch(error => console.log(error));
     dispatch(renewQuestions());
+    dispatch({ type: TEST_SET_USERANSWER, payload: true });
   };
 }

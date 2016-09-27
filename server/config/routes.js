@@ -141,20 +141,21 @@ export default (app) => {
     app.post('/api/answer/', answerController.create);
     app.put('/api/answer/:id', answerController.update);
     app.patch('/api/answer/:id', answerController.update);
-    app.delete('/api/answer/wipe', answerController.wipe);
+    // app.delete('/api/answer/wipe', answerController.wipe);
     app.delete('/api/answer/:id', answerController.destroy);
   } else {
     console.warn(unsupportedMessage('api/answer routes'));
   }
   if (questionController) {
     app.get('/api/question', questionController.index);
-    app.get('/api/question/:id', questionController.show);
+    app.get('/api/question/types', questionController.getQuestionsTypes);
     app.get('/api/question/type/:type', questionController.getQuestionsByType);
+    app.get('/api/question/:id', questionController.show);
     app.post('/api/question/', questionController.create);
     app.post('/api/question/import', questionController.upload);
     app.put('/api/question/:id', questionController.update);
     app.patch('/api/question/:id', questionController.update);
-    app.delete('/api/question/wipe', questionController.wipe);
+    // app.delete('/api/question/wipe', questionController.wipe);
     app.delete('/api/question/:id', questionController.destroy);
   } else {
     console.warn(unsupportedMessage('api/question routes'));

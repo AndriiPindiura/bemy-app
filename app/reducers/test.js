@@ -5,7 +5,10 @@ import {
   TEST_SET_ANSWER,
   TEST_SET_CURRENT_QUESTION,
   TEST_SET_QUESTIONS,
-  TEST_RENEW_QUESTIONS } from '../types';
+  TEST_RENEW_QUESTIONS,
+  TEST_SET_QUESTIONSTYPES,
+  TEST_SET_USERANSWER,
+} from '../types';
 // import { getNextQuestion } from '../external/harmony';
 /* Define your initial state here.
  *
@@ -15,8 +18,8 @@ import {
 // const questionType = 0;
 
 const initialState = {
-  questionsCount: 5,
-  currentQuestionIndex: 1,
+  questionsTypes: [],
+  currentQuestionIndex: 0,
   answers: [],
 };
 
@@ -56,9 +59,13 @@ export default function (state = initialState, action) {
       return state;
     }
 
+    case TEST_SET_USERANSWER: {
+      return Object.assign({}, state, { isUserHaveAnswers: action.payload });
+    }
+
     case TEST_NEXT_QUESTION: {
       deepFreeze(state);
-      if (state.currentQuestionIndex < state.questionsCount) {
+      if (state.currentQuestionIndex < state.questionsTypes.length) {
         if (state.result === undefined) {
           return Object.assign({}, state, {
             currentQuestionIndex: state.currentQuestionIndex + 1,
@@ -78,7 +85,7 @@ export default function (state = initialState, action) {
           answers: [],
         });
       }
-      if (state.currentQuestionIndex === state.questionsCount) {
+      if (state.currentQuestionIndex === state.questionsTypes.length) {
         console.log('=========');
         return Object.assign({}, state, {
           currentQuestionIndex: state.currentQuestionIndex + 1,
@@ -95,6 +102,10 @@ export default function (state = initialState, action) {
       deepFreeze(state);
       // console.log(action.payload);
       return Object.assign({}, state, { questions: action.payload, currentQuestion: action.payload[Math.floor(Math.random() * action.payload.length)] });
+    }
+
+    case TEST_SET_QUESTIONSTYPES: {
+      return Object.assign({}, state, { questionsTypes: action.payload });
     }
 
     case TEST_SET_CURRENT_QUESTION: {

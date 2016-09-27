@@ -149,9 +149,15 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
-export function wipe(req, res) {
-  return Question.remove().then(() => res.sendStatus(204), () => res.sendStatus(500));
+export function getQuestionsTypes(req, res) {
+  return Question.find().distinct('socionicType')
+    .then(respondWithResult(res))
+    .catch(handleError(res));
 }
+
+// export function wipe(req, res) {
+//   return Question.remove().then(() => res.sendStatus(204), () => res.sendStatus(500));
+// }
 
 export default {
   index,
@@ -161,5 +167,6 @@ export default {
   destroy,
   upload,
   getQuestionsByType,
-  wipe
+  getQuestionsTypes
+  // wipe
 };

@@ -11,6 +11,7 @@ const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 const TestComponent = props => {
   // console.log(JSON.stringify(socionicQuestions));
   const { test } = props;
+  const length = test.questionsTypes ? test.questionsTypes.length : 0;
   // console.log(test);
   // return (
   //   <ReactCSSTransitionGroup
@@ -35,7 +36,7 @@ const TestComponent = props => {
     >
       <section className={styles.test}>
         <div>
-          <h1><span>{test.currentQuestionIndex}</span>/{test.questionsCount}</h1>
+          <h1><span>{test.currentQuestionIndex + 1}</span>/{length}</h1>
           <button onClick={props.actions.setCurrentQuestion}>
             <svg width="30px" height="22px" viewBox="0 0 30 22" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -89,16 +90,16 @@ const TestComponent = props => {
         <footer>
           <BemyButton
             action={
-              props.test.currentQuestionIndex >= props.test.questionsCount
+              test.currentQuestionIndex + 1 >= length
               ? () => {
-                props.actions.nextQuestion(test.currentQuestionIndex);
+                props.actions.nextQuestion(test.questionsTypes[test.currentQuestionIndex]);
                 props.actions.postAnswers(test);
               }
               : () => {
-                props.actions.nextQuestion(test.currentQuestionIndex);
+                props.actions.nextQuestion(test.questionsTypes[test.currentQuestionIndex]);
               }
             }
-            to={props.test.currentQuestionIndex >= props.test.questionsCount ? '/result' : '/test'}
+            to={test.currentQuestionIndex + 1 >= length ? '/result' : '/test'}
             enabled={test.answers.length > 0}
             title="Продолжить"
           />

@@ -7,12 +7,14 @@
 
   header {
     display: flex;
+    justify-content: center;
     position: relative;
     width: 100%;
 
     svg {
       position: absolute;
-      margin: 0 0 0 px(36);
+      // margin: 0 0 0 px(36);
+      left: px(36);
 
       &:hover {
         .arrow {
@@ -22,17 +24,8 @@
     }
 
     figure {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: px(300);
-      margin: 0 auto;
-      // position: relative;
-      // left: 50%;
-      // // margin-left: px(-150);
       figcaption {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-
+        flex-grow: 1;
         h3 {
           color: $nameColor;
           font-family: Lato-Light;
