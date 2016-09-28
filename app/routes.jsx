@@ -67,7 +67,6 @@ export default (store) => {
             if (responseUserAnswers.status !== 404) {
               store.dispatch({ type: 'TEST_SET_USERANSWER', payload: true });
               replace('/result');
-              console.log('redirect to result');
               callback();
             } else {
               store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });

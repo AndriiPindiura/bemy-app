@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Link } from 'react-router';
+import BemyButton from '../button';
+
 // import ReactDOM from 'react-dom';
 import styles from './main.scss';
 
@@ -25,7 +26,13 @@ const TestBeginComponent = () => {
           Постарайся отвечать честно, так как второй возможности его пройти уже не будет.
           В результате, ты увидишь список людей с которыми будет наибольшая психологическая совместимость
         </p>
-        <Link to="/test">НАЧАТЬ ТЕСТ</Link>
+        <footer>
+          <BemyButton
+            to="/test"
+            enabled
+            title="начать тест"
+          />
+        </footer>
         {/* <button onClick={this.props.actions.changeView}>
           НАЧАТЬ ТЕСТ
         </button> */}

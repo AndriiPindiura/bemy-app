@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
 import BemyButton from '../button';
 import styles from './main.scss';
 
