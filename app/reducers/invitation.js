@@ -35,9 +35,9 @@ export default function (state = initialState, action) {
 
   switch (action.type) {
     case IV_CHANGE_QUESTION: {
-      return Object.assign({}, state, {
+      return { ...state,
         invitationCurrentQuestion: state.invitationQuestions[action.payload - 1],
-      });
+      };
     }
 // case 'FB_INIT': {
 // 	return state;

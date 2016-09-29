@@ -49,51 +49,51 @@ export default function (state = initialState, action) {
       const exists = !(answers.find(answer => answer === action.payload) === undefined);
       if (exists) {
         answers = state.answers.filter(answer => answer !== action.payload);
-        return Object.assign({}, state, { answers });
+        return { ...state, answers };
       }
       if (answers.length < 5) {
-        return Object.assign({}, state, {
+        return { ...state,
           answers: answers.concat(action.payload),
-        });
+        };
       }
       return state;
     }
 
     case TEST_SET_USERANSWER: {
-      return Object.assign({}, state, { isUserHaveAnswers: action.payload });
+      return { ...state, isUserHaveAnswers: action.payload };
     }
 
     case TEST_NEXT_QUESTION: {
       deepFreeze(state);
       if (state.currentQuestionIndex < state.questionsTypes.length) {
         if (state.result === undefined) {
-          return Object.assign({}, state, {
+          return { ...state,
             currentQuestionIndex: state.currentQuestionIndex + 1,
             result: [{
               question: state.currentQuestion._id,
               answers: [...state.answers],
             }],
             answers: [],
-          });
+          };
         }
-        return Object.assign({}, state, {
+        return { ...state,
           currentQuestionIndex: state.currentQuestionIndex + 1,
           result: [...state.result, {
             question: state.currentQuestion._id,
             answers: [...state.answers],
           }],
           answers: [],
-        });
+        };
       }
       if (state.currentQuestionIndex === state.questionsTypes.length) {
         console.log('=========');
-        return Object.assign({}, state, {
+        return { ...state,
           currentQuestionIndex: state.currentQuestionIndex + 1,
           result: [...state.result, {
             question: state.currentQuestion._id, answers: [...state.answers],
           }],
           answers: [],
-        });
+        };
       }
       return state;
     }
@@ -101,11 +101,14 @@ export default function (state = initialState, action) {
     case TEST_SET_QUESTIONS: {
       deepFreeze(state);
       // console.log(action.payload);
-      return Object.assign({}, state, { questions: action.payload, currentQuestion: action.payload[Math.floor(Math.random() * action.payload.length)] });
+      return { ...state,
+        questions: action.payload,
+        currentQuestion: action.payload[Math.floor(Math.random() * action.payload.length)]
+      };
     }
 
     case TEST_SET_QUESTIONSTYPES: {
-      return Object.assign({}, state, { questionsTypes: action.payload });
+      return { ...state, questionsTypes: action.payload };
     }
 
     case TEST_SET_CURRENT_QUESTION: {
@@ -118,16 +121,16 @@ export default function (state = initialState, action) {
           sameQuestion = false;
         }
       }
-      return Object.assign({}, state, { currentQuestion: state.questions[index], answers: [] });
+      return { ...state, currentQuestion: state.questions[index], answers: [] };
     }
 
     case TEST_RENEW_QUESTIONS: {
       deepFreeze(state);
-      return Object.assign({}, state, {
+      return { ...state,
         currentQuestionIndex: 1,
         result: [],
         answers: [],
-      });
+      };
     }
     default: {
       return state;

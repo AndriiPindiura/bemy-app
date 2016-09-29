@@ -18,17 +18,17 @@ export default function (state = initialState, action) {
 
   switch (action.type) {
     case SET_CALLBACK_URL: {
-      return Object.assign({}, state, { callbackUrl: action.payload });
+      return { ...state, callbackUrl: action.payload };
     }
     case FB_SET_INIT: {
-      return Object.assign({}, state, { fbSdk: true });
+      return { ...state, fbSdk: true };
     }
     case FB_SET_USER: {
       deepFreeze(state);
       const user = action.payload;
       const birthday = new Date(user.birthday);
       const now = new Date();
-      return Object.assign({}, state, {
+      return { ...state,
         firstName: user.first_name,
         lastName: user.last_name,
         age: now.getFullYear() - birthday.getFullYear(),
@@ -36,11 +36,11 @@ export default function (state = initialState, action) {
         email: user.email,
         gender: user.gender,
         location: user.location,
-      });
+      };
     }
 
     case FB_SET_PICTURE: {
-      return Object.assign({}, state, { photo: action.payload.data.url });
+      return { ...state, photo: action.payload.data.url };
     }
 		/*
 		case 'YOUR_ACTION': {

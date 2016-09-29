@@ -22,9 +22,9 @@
     }
 
     figure {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      // display: flex;
+      // flex-wrap: wrap;
+      // justify-content: center;
       width: px(300);
       margin: 0 auto;
       // position: relative;
@@ -34,7 +34,7 @@
       div {
         width: px(200);
         height: px(228);
-        margin: 0 0 px(36);
+        margin: 0 auto px(36);
         border: 2px solid $buttonBackgroundColor;
         border-radius: 50%;
         overflow: hidden;

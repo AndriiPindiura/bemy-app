@@ -19,11 +19,11 @@ export default function (state = initialState, action) {
     case HARMONY_VIEW_HUMAN_DETAILS: {
       deepFreeze(state);
       const selectedHuman = getHumanById(action.payload);
-      return Object.assign({}, state, { selectedHuman });
+      return { ...state,  selectedHuman };
     }
 
     case HARMONY_SET_FIREBASE_INIT: {
-      return Object.assign({}, state, { firebaseInit: action.payload });
+      return { ...state, firebaseInit: action.payload };
     }
 
     default: {
