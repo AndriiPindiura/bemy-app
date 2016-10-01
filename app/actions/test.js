@@ -29,6 +29,12 @@ export function setQuestionsByTypeAC(payload) {
 }
 
 export function setQuestionsByType(parameter) {
+
+  // return {
+  //   type: TEST_SET_QUESTIONS,
+  //   promise: fetch(`/api/question/type/${parameter}`, { credentials: 'include' })
+  // };
+
   return (dispatch) => {
     fetch(`/api/question/type/${parameter}`, { credentials: 'include' })
       .then(response => {
