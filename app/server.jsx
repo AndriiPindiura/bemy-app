@@ -134,6 +134,23 @@ export default function render(req, res) {
               <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
               ${analtyicsScript}
               <script type="text/javascript" charset="utf-8" src="/assets/app.js"></script>
+              <script>
+                window.fbAsyncInit = function() {
+                  FB.init({
+                    appId      : '258087497891910',
+                    xfbml      : true,
+                    version    : 'v2.7'
+                  });
+                };
+
+                (function(d, s, id){
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) {return;}
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+              </script>
             </body>
           </html>
         `);

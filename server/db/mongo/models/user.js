@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     website: { type: String, default: '' },
     picture: { type: String, default: '' }
   },
+  socionicType: { type: Object, default: { intrivert: null, ratio: null, logic: null, intuit: null }},
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   google: {},

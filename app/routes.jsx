@@ -105,7 +105,6 @@ export default (store) => {
 
   return (
     <Route path="/" component={App}>
-      {/* <IndexRoute component={Vote} /> */}
       <IndexRoute component={InvitationContainer} />
       <Route path="auth/facebook/:callback" component={AuthWithParams} />
       <Route path="auth/facebook/" component={Auth} />
@@ -113,10 +112,12 @@ export default (store) => {
       <Route path="testbegin" component={TestBeginContainer} onEnter={requireAuth} />
       <Route path="test" component={TestContainer} onEnter={requireNewUser} />
       <Route path="result" component={ResultContainer} onEnter={requireTestPassed} />
-      <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
+      {/*
+        <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
       <Route path="profile" component={ProfileContainer} onEnter={requireTestPassed} />
       <Route path="mail" component={MailContainer} onEnter={requireTestPassed} />
       <Route path="me" component={AccountContainer} onEnter={requireAuth} />
+      */}
     </Route>
   );
 };

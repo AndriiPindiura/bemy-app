@@ -12,16 +12,16 @@ const questionController = controllers && controllers.question;
 
 export default (app) => {
   const auth = (req, res, next) => {
-    // console.log(req.session);
-    // console.log('auth');
-    // console.log(req.session);
-    // console.log(req.session.passport);
     if (req.session.passport && req.session.passport.user) {
       return next();
     }
     return res.sendStatus(401);
   };
 
+  const checkAccessRights = (req, res, next) => {
+    console.log(usersController.login);
+    next();
+  };
 
   // user routes
   if (usersController) {
@@ -35,11 +35,6 @@ export default (app) => {
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
-
-  app.get('/t', (req, res) => {
-    console.log(req.session);
-    res.send('hello');
-  });
 
   if (passportConfig && passportConfig.google) {
     // google auth
@@ -67,28 +62,12 @@ export default (app) => {
   }
 
   if (passportConfig && passportConfig.facebook) {
-    // console.log(passportConfig.facebook);
-    // facebook auth
-    // Redirect the user to Google for authentication. When complete, Google
-    // will redirect the user back to the application at
-    // /auth/google/return
-    // Authentication with google requires an additional scope param, for more info go
-    // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
     app.get('/auth/facebook/', (req, res, next) => {
-      // console.log('clear auth');
       passport.authenticate('facebook', {
         scope: ['user_about_me', 'email', 'user_likes', 'user_hometown', 'user_location', 'user_birthday'],
         callbackURL: '/auth/facebook/callback',
       })(req, res, next);
     });
-
-    // app.get('/auth/facebook/callback/me',
-    //   passport.authenticate('facebook', {
-    //     callbackURL: '/auth/facebook/callback/me',
-    //     successRedirect: '/me',
-    //     failureRedirect: '/login'
-    //   })
-    // );
 
     app.get('/auth/facebook/callback/:id', (req, res, next) => {
       passport.authenticate('facebook', {
@@ -113,29 +92,10 @@ export default (app) => {
         callbackURL: `/auth/facebook/callback/${req.params.id}`,
       })(req, res, next);
     });
-
-
-    // Google will redirect the user to this URL after authentication. Finish the
-    // process by verifying the assertion. If valid, the user will be logged in.
-    // Otherwise, the authentication has failed.
   }
 
-
-  // topic routes
-  // if (topicsController) {
-  //   app.get('/topic', topicsController.all);
-  //   app.post('/topic/:id', topicsController.add);
-  //   app.put('/topic/:id', topicsController.update);
-  //   app.delete('/topic/:id', topicsController.remove);
-  // } else {
-  //   console.warn(unsupportedMessage('topics routes'));
-  // }
   if (answerController) {
-    // app.get('/api/answer', (req, res) => {
-    //   console.log(req.user);
-    //   res.send('hello');
-    // });
-    app.get('/api/answer', answerController.index);
+    app.get('/api/answer', auth, checkAccessRights, answerController.index);
     app.get('/api/answer/check', answerController.check);
     app.get('/api/answer/:id', answerController.show);
     app.post('/api/answer/', answerController.create);
