@@ -17,20 +17,20 @@ const UserSchema = new mongoose.Schema({
   password: String,
   tokens: Array,
   profile: {
-    displayName: { type: String, default: '' },
-    firstName: { type: String, default: '' },
-    lastName: { type: String, default: '' },
-    gender: { type: String, default: '' },
-    birthday: { type: String, default: '' },
-    location: { type: String, default: '' },
-    website: { type: String, default: '' },
-    picture: { type: String, default: '' }
+    displayName: { type: String, default: null },
+    firstName: { type: String, default: null },
+    lastName: { type: String, default: null },
+    gender: { type: String, default: null },
+    birthday: { type: String, default: null },
+    location: { type: String, default: null },
+    website: { type: String, default: null },
+    picture: { type: String, default: null }
   },
   socionicType: { type: Object, default: { intrivert: null, ratio: null, logic: null, intuit: null }},
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   google: {},
-  facebook: {}
+  facebook: { type: String, unique: true }
 });
 
 function encryptPassword(next) {

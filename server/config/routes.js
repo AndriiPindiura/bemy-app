@@ -9,6 +9,7 @@ const usersController = controllers && controllers.users;
 // const topicsController = controllers && controllers.topics;
 const answerController = controllers && controllers.answer;
 const questionController = controllers && controllers.question;
+const userRoleController = controllers && controllers.userrole;
 
 export default (app) => {
   const auth = (req, res, next) => {
@@ -18,9 +19,26 @@ export default (app) => {
     return res.sendStatus(401);
   };
 
-  const checkAccessRights = (req, res, next) => {
-    console.log(usersController.login);
-    next();
+  const requireRole = role => {
+    return (req, res, next) => {
+      if (!req.user) {
+        return res.sendStatus(401);
+      }
+      return userRoleController.getRoleId(role)
+        .then(roleEntity => {
+          if (!roleEntity) {
+            return res.sendStatus(401);
+          }
+          return userRoleController.checkRole(req.user._id, roleEntity._id)
+            .then(result => {
+              if (!result) {
+                return res.sendStatus(401);
+              }
+              return next();
+            });
+        })
+        .catch(error => console.log(error));
+    };
   };
 
   // user routes
@@ -94,8 +112,15 @@ export default (app) => {
     });
   }
 
+  if (userRoleController) {
+    app.post('/api/roles/', userRoleController.addRole);
+    app.post('/api/roles/assign', userRoleController.assignRole);
+    app.get('/api/roles/', requireRole('admin2'), userRoleController.showRoles);
+    // app.get('/api/roles/:id', userRoleController.checkRole);
+  }
+
   if (answerController) {
-    app.get('/api/answer', auth, checkAccessRights, answerController.index);
+    app.get('/api/answer', auth, answerController.index);
     app.get('/api/answer/check', answerController.check);
     app.get('/api/answer/:id', answerController.show);
     app.post('/api/answer/', answerController.create);
