@@ -1,4 +1,6 @@
 import deepFreeze from 'deep-freeze';
+import _ from 'lodash';
+
 import {
   // TEST_CHANGE_QUESTION,
   TEST_NEXT_QUESTION,
@@ -101,9 +103,28 @@ export default function (state = initialState, action) {
     case TEST_SET_QUESTIONS: {
       deepFreeze(state);
       // console.log(action.payload);
+      const questions = [...action.payload];
+      const questionsTypes = [];
+      questions.forEach(question => {
+        if (questionsTypes.indexOf(question.socionicType) === -1) {
+          questionsTypes.push(question.socionicType);
+        }
+      });
+      const currentQuestion = questions.filter(question => question.socionicType === questionsTypes[state.currentQuestionIndex]);
+      // const qustionsTypes = _(questions)
+      //   .groupBy('socionicType')
+      //   .map((items, name) => ({ name, count: items.length }))
+      //   .value();
+      // const qustionsTypes = questions.filter((x, i) => {
+      //   console.log(x);
+      //   console.log(i);
+      //   return questions[x];
+      // });
+      console.log(questionsTypes);
       return { ...state,
-        questions: action.payload,
-        currentQuestion: action.payload[Math.floor(Math.random() * action.payload.length)]
+        questions,
+        questionsTypes,
+        currentQuestion: currentQuestion[Math.floor(Math.random() * currentQuestion.length)]
       };
     }
 

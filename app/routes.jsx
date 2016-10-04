@@ -9,10 +9,10 @@ import HelloContainer from './containers/HelloContainer';
 import TestBeginContainer from './containers/TestBeginContainer';
 import TestContainer from './containers/TestContainer';
 import ResultContainer from './containers/ResultContainer';
-import PeopleContainer from './containers/PeopleContainer';
-import ProfileContainer from './containers/ProfileContainer';
-import MailContainer from './containers/MailContainer';
-import AccountContainer from './containers/AccountContainer';
+// import PeopleContainer from './containers/PeopleContainer';
+// import ProfileContainer from './containers/ProfileContainer';
+// import MailContainer from './containers/MailContainer';
+// import AccountContainer from './containers/AccountContainer';
 
 // require('es6-promise').polyfill();
 /*
@@ -61,37 +61,65 @@ export default (store) => {
       // console.log(window);
       const test = store.getState().test;
       requireAuth(nextState, replace, callback);
-      if (test.isUserHaveAnswers === undefined) {
-        fetch('/api/answer/check', { credentials: 'include' })
-          .then(responseUserAnswers => {
-            if (responseUserAnswers.status !== 404) {
-              store.dispatch({ type: 'TEST_SET_USERANSWER', payload: true });
-              replace('/result');
-              callback();
-            } else {
-              store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });
-              fetch('/api/question/types', { credentials: 'include' })
-                .then(responseQuestionsTypes => {
-                  responseQuestionsTypes.json().then(dataQuestionsTypes => {
-                    store.dispatch({ type: 'TEST_SET_QUESTIONSTYPES', payload: dataQuestionsTypes });
-                    // console.log(store.getState().test.questionsTypes);
-                    fetch(`/api/question/type/${store.getState().test.questionsTypes[test.currentQuestionIndex]}`,
-                      { credentials: 'include' })
-                      .then(responseQuestions => {
-                        responseQuestions.json().then(data => {
-                          store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
-                          callback();
-                        }).catch(errrorJSON => console.log(errrorJSON));
-                      })
-                      .catch(errorQuestions => console.log(errorQuestions));
-                    // callback();
-                  }).catch(errorJSON => console.log(errorJSON));
-                })
-                .catch(errorQuestionsTypes => console.log(errorQuestionsTypes));
-            }
-          })
-          .catch(errorUserAnswers => console.log(errorUserAnswers));
+      if (test.isUserHaveAnswers) {
+        replace('/result');
+      } else if (test.isUserHaveAnswers === undefined) {
+        // store.dispatch({
+        //   type: 'TEST_SET_QUESTIONS',
+        //   promise: fetch('/api/init', { credentials: 'include' })
+        // }).then(em => console.log(em));
+        fetch('/api/init', { credentials: 'include' })
+        .then(response => {
+          // console.log(response);
+          store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });
+          if (response.status === 204) {
+            replace('/result');
+          }
+          if (response.status === 200) {
+            response.json()
+              .then(data => {
+                // console.log(data);
+                store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+                callback();
+              })
+              .catch(parseError => console.log(parseError));
+          }
+        })
+        .catch(error => console.log(error));
+      } else {
+        callback();
       }
+      // if (test.isUserHaveAnswers === undefined) {
+      //   fetch('/api/answer/check', { credentials: 'include' })
+      //     .then(responseUserAnswers => {
+      //       if (responseUserAnswers.status !== 404) {
+      //         store.dispatch({ type: 'TEST_SET_USERANSWER', payload: true });
+      //         replace('/result');
+      //         callback();
+      //       } else {
+      //         store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });
+      //         fetch('/api/question/types', { credentials: 'include' })
+      //           .then(responseQuestionsTypes => {
+      //             responseQuestionsTypes.json().then(dataQuestionsTypes => {
+      //               store.dispatch({ type: 'TEST_SET_QUESTIONSTYPES', payload: dataQuestionsTypes });
+      //               // console.log(store.getState().test.questionsTypes);
+      //               fetch(`/api/question/type/${store.getState().test.questionsTypes[test.currentQuestionIndex]}`,
+      //                 { credentials: 'include' })
+      //                 .then(responseQuestions => {
+      //                   responseQuestions.json().then(data => {
+      //                     store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+      //                     callback();
+      //                   }).catch(errrorJSON => console.log(errrorJSON));
+      //                 })
+      //                 .catch(errorQuestions => console.log(errorQuestions));
+      //               // callback();
+      //             }).catch(errorJSON => console.log(errorJSON));
+      //           })
+      //           .catch(errorQuestionsTypes => console.log(errorQuestionsTypes));
+      //       }
+      //     })
+      //     .catch(errorUserAnswers => console.log(errorUserAnswers));
+      // }
     } else {
       callback();
     }

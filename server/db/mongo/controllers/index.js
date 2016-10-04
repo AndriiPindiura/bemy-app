@@ -3,8 +3,9 @@ import users from './users';
 import answer from './answer';
 import question from './question';
 import userrole from './userrole';
+import appinit from './appinit';
 
-export { topics, users, answer, question, userrole };
+export { topics, users, answer, question, userrole, appinit };
 
 export default {
   topics,
@@ -12,4 +13,5 @@ export default {
   answer,
   question,
   userrole,
+  appinit,
 };

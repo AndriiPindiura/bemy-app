@@ -6,10 +6,10 @@ import unsupportedMessage from '../db/unsupportedMessage';
 import { controllers, passport as passportConfig } from '../db';
 
 const usersController = controllers && controllers.users;
-// const topicsController = controllers && controllers.topics;
 const answerController = controllers && controllers.answer;
 const questionController = controllers && controllers.question;
 const userRoleController = controllers && controllers.userrole;
+const appController = controllers && controllers.appinit;
 
 export default (app) => {
   const auth = (req, res, next) => {
@@ -19,6 +19,7 @@ export default (app) => {
     return res.sendStatus(401);
   };
 
+  // require role middleware
   const requireRole = role => {
     return (req, res, next) => {
       if (!req.user) {
@@ -37,7 +38,10 @@ export default (app) => {
               return next();
             });
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error);
+            return res.sendStatus(401);
+        });
     };
   };
 
@@ -47,9 +51,7 @@ export default (app) => {
     app.post('/signup', usersController.signUp);
     app.get('/logout', usersController.logout);
     // app.get('/all', passport.authorize('facebook'), usersController.all);
-    app.get('/all', auth, usersController.all);
-    // console.log(usersController.info);
-    // app.get('/me', auth, usersController.me);
+    app.get('/all', requireRole('admin'), usersController.all);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
@@ -113,21 +115,25 @@ export default (app) => {
   }
 
   if (userRoleController) {
-    app.post('/api/roles/', userRoleController.addRole);
-    app.post('/api/roles/assign', userRoleController.assignRole);
-    app.get('/api/roles/', requireRole('admin2'), userRoleController.showRoles);
+    app.post('/api/roles/', requireRole('admin'), userRoleController.addRole);
+    app.post('/api/roles/assign', requireRole('admin'), userRoleController.assignRole);
+    app.get('/api/roles/', requireRole('admin'), userRoleController.showRoles);
     // app.get('/api/roles/:id', userRoleController.checkRole);
+  }
+
+  if (appController) {
+    app.get('/api/init', appController.appinit);
   }
 
   if (answerController) {
     app.get('/api/answer', auth, answerController.index);
     app.get('/api/answer/check', answerController.check);
-    app.get('/api/answer/:id', answerController.show);
-    app.post('/api/answer/', answerController.create);
-    app.put('/api/answer/:id', answerController.update);
-    app.patch('/api/answer/:id', answerController.update);
+    // app.get('/api/answer/:id', answerController.show);
+    app.post('/api/answer/', auth, answerController.create);
+    // app.put('/api/answer/:id', answerController.update);
+    // app.patch('/api/answer/:id', answerController.update);
     // app.delete('/api/answer/wipe', answerController.wipe);
-    app.delete('/api/answer/:id', answerController.destroy);
+    app.delete('/api/answer/:id', requireRole('admin'), answerController.destroy);
   } else {
     console.warn(unsupportedMessage('api/answer routes'));
   }
@@ -136,12 +142,12 @@ export default (app) => {
     app.get('/api/question/types', questionController.getQuestionsTypes);
     app.get('/api/question/type/:type', questionController.getQuestionsByType);
     app.get('/api/question/:id', questionController.show);
-    app.post('/api/question/', questionController.create);
-    app.post('/api/question/import', questionController.upload);
-    app.put('/api/question/:id', questionController.update);
-    app.patch('/api/question/:id', questionController.update);
+    app.post('/api/question/', requireRole('admin'), questionController.create);
+    app.post('/api/question/import', requireRole('admin'), questionController.upload);
+    app.put('/api/question/:id', requireRole('admin'), questionController.update);
+    app.patch('/api/question/:id', requireRole('admin'), questionController.update);
     // app.delete('/api/question/wipe', questionController.wipe);
-    app.delete('/api/question/:id', questionController.destroy);
+    app.delete('/api/question/:id', requireRole('admin'), questionController.destroy);
   } else {
     console.warn(unsupportedMessage('api/question routes'));
   }

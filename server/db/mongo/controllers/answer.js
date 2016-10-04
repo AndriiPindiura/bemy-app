@@ -120,18 +120,6 @@ export function destroy(req, res) {
 }
 
 export function check(req, res) {
-  console.log(req.user._id);
-  if (!req.user) {
-    return res.sendStatus(403);
-  }
-  // return Answer.findOne({ user: req.user._id})
-  //   .then(user => {
-  //     console.log(user);
-  //     res.sendStatus(200);
-  //   })
-  //   .catch(handleError(res));
-
-
   return Answer.findOne({ user: req.user._id})
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
