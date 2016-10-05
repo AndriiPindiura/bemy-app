@@ -3,6 +3,8 @@
 * As seen in: https://github.com/caljrimmer/isomorphic-redux-app
 */
 
+export const getAsyncType = (type, state) => `${type}${state}`;
+
 export default function promiseMiddleware() {
   return next => action => {
     const { promise, type, ...rest } = action;

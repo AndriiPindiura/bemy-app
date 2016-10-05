@@ -5,8 +5,8 @@ import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { Provider } from 'react-redux';
 // import FB from 'fb';
 import createRoutes from './routes';
-import configureStore from './store/configureStore';
-import preRenderMiddleware from './middlewares/preRenderMiddleware';
+import configureStore from './redux/configureStore';
+import preRenderMiddleware from './redux/middlewares/preRenderMiddleware';
 import header from './components/Meta';
 
 const clientConfig = {

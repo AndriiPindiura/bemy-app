@@ -6,7 +6,7 @@ import user from './user';
 import facebook from './facebook';
 import invitation from './invitation';
 import test from './test';
-import listpeople from './listpeople';
+import people from './people';
 import harmony from './harmony';
 
 // Combine reducers with routeReducer which keeps track of
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   invitation,
   test,
   harmony,
-  listpeople,
+  people,
   routing,
 });
 

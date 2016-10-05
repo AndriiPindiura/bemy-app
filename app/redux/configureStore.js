@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import rootReducer from '../reducers';
-import promiseMiddleware from '../middlewares/promiseMiddleware';
+import rootReducer from './modules';
+import promiseMiddleware from './middlewares/promiseMiddleware';
 
 /*
  * @param {Object} initial state to bootstrap our stores with for server-side rendering
@@ -28,8 +28,8 @@ export default function configureStore(initialState, history) {
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers');
+    module.hot.accept('./modules', () => {
+      const nextReducer = require('./modules');
 
       store.replaceReducer(nextReducer);
     });

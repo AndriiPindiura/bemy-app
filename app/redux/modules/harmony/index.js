@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze';
-import { HARMONY_VIEW_HUMAN_DETAILS, HARMONY_SET_FIREBASE_INIT } from '../types';
-import { getHumanById } from '../external/harmony';
+import { HARMONY_VIEW_HUMAN_DETAILS, HARMONY_SET_FIREBASE_INIT } from '../../../types';
+import { getHumanById } from '../../../external/harmony';
 
 /* Define your initial state here.
  *

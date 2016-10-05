@@ -9,12 +9,12 @@ import HelloContainer from './containers/HelloContainer';
 import TestBeginContainer from './containers/TestBeginContainer';
 import TestContainer from './containers/TestContainer';
 import ResultContainer from './containers/ResultContainer';
+import * as testActions from './redux/modules/test';
 // import PeopleContainer from './containers/PeopleContainer';
 // import ProfileContainer from './containers/ProfileContainer';
 // import MailContainer from './containers/MailContainer';
 // import AccountContainer from './containers/AccountContainer';
 
-// require('es6-promise').polyfill();
 /*
  * @param {Redux Store}
  * We require store as an argument here because we wish to get
@@ -53,33 +53,33 @@ export default (store) => {
   };
 
   const requireNewUser = (nextState, replace, callback) => {
+    // console.log(testActions);
     if (store.getState().test.isUserHaveAnswers) {
       replace('/result');
       callback();
     }
     if (canUseDOM) {
-      // console.log(window);
       const test = store.getState().test;
       requireAuth(nextState, replace, callback);
-      if (test.isUserHaveAnswers) {
-        replace('/result');
-      } else if (test.isUserHaveAnswers === undefined) {
+      if (test.isUserHaveAnswers === undefined) {
         // store.dispatch({
-        //   type: 'TEST_SET_QUESTIONS',
+        //   type: 'bemy-app/test/QUESTIONS',
         //   promise: fetch('/api/init', { credentials: 'include' })
         // }).then(em => console.log(em));
         fetch('/api/init', { credentials: 'include' })
         .then(response => {
           // console.log(response);
-          store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });
           if (response.status === 204) {
+            store.dispatch(testActions.setUserAnswer(true));
             replace('/result');
+            callback();
           }
           if (response.status === 200) {
             response.json()
               .then(data => {
                 // console.log(data);
-                store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
+                store.dispatch(testActions.setUserAnswer(false));
+                store.dispatch(testActions.setQuestionsByTypeAC(data));
                 callback();
               })
               .catch(parseError => console.log(parseError));
@@ -89,40 +89,8 @@ export default (store) => {
       } else {
         callback();
       }
-      // if (test.isUserHaveAnswers === undefined) {
-      //   fetch('/api/answer/check', { credentials: 'include' })
-      //     .then(responseUserAnswers => {
-      //       if (responseUserAnswers.status !== 404) {
-      //         store.dispatch({ type: 'TEST_SET_USERANSWER', payload: true });
-      //         replace('/result');
-      //         callback();
-      //       } else {
-      //         store.dispatch({ type: 'TEST_SET_USERANSWER', payload: false });
-      //         fetch('/api/question/types', { credentials: 'include' })
-      //           .then(responseQuestionsTypes => {
-      //             responseQuestionsTypes.json().then(dataQuestionsTypes => {
-      //               store.dispatch({ type: 'TEST_SET_QUESTIONSTYPES', payload: dataQuestionsTypes });
-      //               // console.log(store.getState().test.questionsTypes);
-      //               fetch(`/api/question/type/${store.getState().test.questionsTypes[test.currentQuestionIndex]}`,
-      //                 { credentials: 'include' })
-      //                 .then(responseQuestions => {
-      //                   responseQuestions.json().then(data => {
-      //                     store.dispatch({ type: 'TEST_SET_QUESTIONS', payload: data });
-      //                     callback();
-      //                   }).catch(errrorJSON => console.log(errrorJSON));
-      //                 })
-      //                 .catch(errorQuestions => console.log(errorQuestions));
-      //               // callback();
-      //             }).catch(errorJSON => console.log(errorJSON));
-      //           })
-      //           .catch(errorQuestionsTypes => console.log(errorQuestionsTypes));
-      //       }
-      //     })
-      //     .catch(errorUserAnswers => console.log(errorUserAnswers));
-      // }
-    } else {
-      callback();
     }
+    callback();
   };
 
   const AuthWithParams = props => {

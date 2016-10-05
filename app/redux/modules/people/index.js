@@ -1,4 +1,4 @@
-import { getPeople } from '../external/harmony';
+import { getPeople } from '../../../external/harmony';
 
 const initialState = {
   people: getPeople(),

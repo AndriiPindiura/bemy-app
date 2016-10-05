@@ -9,23 +9,8 @@ const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 
 const TestComponent = props => {
-  // console.log(JSON.stringify(socionicQuestions));
-  const { test } = props;
+  const { test, actions } = props;
   const length = test.questionsTypes ? test.questionsTypes.length : 0;
-  // console.log(test);
-  // return (
-  //   <ReactCSSTransitionGroup
-  //     transitionName="test"
-  //     transitionAppear
-  //     transitionEnter={false}
-  //     transitionLeave={false}
-  //     transitionAppearTimeout={800}
-  //   >
-  //     <section className={styles.test}>
-  //       <h1><span>{test.currentQuestionIndex}</span>/{test.questionsCount}</h1>
-  //     </section>
-  //   </ReactCSSTransitionGroup>
-  // );
   return (
     <ReactCSSTransitionGroup
       transitionName="test"
@@ -37,7 +22,7 @@ const TestComponent = props => {
       <section className={styles.test}>
         <div>
           <h1><span>{test.currentQuestionIndex + 1}</span>/{length}</h1>
-          <button onClick={props.actions.setCurrentQuestion}>
+          <button onClick={actions.setCurrentQuestion}>
             <svg width="30px" height="22px" viewBox="0 0 30 22" version="1.1" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="hover">
@@ -63,10 +48,9 @@ const TestComponent = props => {
               <div key={answer._id} className={styles.radio}>
                 <input
                   type="radio"
-                  // value={answer._id}
                   id={answer._id}
                   name={test.currentQuestion._id}
-                  onChange={() => props.actions.changeAnswer(answer._id)}
+                  onChange={() => actions.changeAnswer(answer._id)}
                 />
                 <label htmlFor={answer._id}>{answer.title}</label>
               </div>
@@ -75,10 +59,9 @@ const TestComponent = props => {
                 <input
                   type="checkbox"
                   checked={test.answers.find(item => item === answer._id) !== undefined}
-                  // value={answer._id}
                   id={answer._id}
                   name={test.currentQuestion._id}
-                  onChange={() => props.actions.changeAnswer(answer._id)}
+                  onChange={() => actions.changeAnswer(answer._id)}
                 />
                 <label htmlFor={answer._id}>{answer.title}</label>
               </div>
@@ -92,12 +75,9 @@ const TestComponent = props => {
             action={
               test.currentQuestionIndex + 1 >= length
               ? () => {
-                props.actions.nextQuestion(test.questionsTypes[test.currentQuestionIndex]);
-                props.actions.postAnswers(test);
+                actions.postAnswers(test);
               }
-              : () => {
-                props.actions.nextQuestion(test.questionsTypes[test.currentQuestionIndex]);
-              }
+              : actions.nextQuestion
             }
             to={test.currentQuestionIndex + 1 >= length ? '/result' : '/test'}
             enabled={test.answers.length > 0}

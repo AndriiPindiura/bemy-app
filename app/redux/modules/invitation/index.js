@@ -1,4 +1,4 @@
-import { IV_CHANGE_QUESTION } from '../types';
+import { IV_CHANGE_QUESTION } from '../../../types';
 /* Define your initial state here.
  *
  * If you change the type from object to something else, do not forget to update
@@ -25,7 +25,7 @@ const initialState = {
   invitationCurrentQuestion: {
     key: 1,
     text: 'Мы помогаем находить людей для создания отношений.',
-    background: require('../theme/images/invitation/bgimg.png'),
+    background: require('../../../theme/images/invitation/bgimg.png'),
   },
 };
 

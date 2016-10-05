@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import { FB_SET_USER, FB_SET_PICTURE, FB_SET_INIT, SET_CALLBACK_URL } from '../types';
+import { FB_SET_USER, FB_SET_PICTURE, FB_SET_INIT, SET_CALLBACK_URL } from '../../../types';
 
 /* Define your initial state here.
  *
