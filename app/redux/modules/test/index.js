@@ -1,6 +1,7 @@
 import deepFreeze from 'deep-freeze';
-import { browserHistory } from 'react-router';
+import request from 'axios';
 import { getAsyncType } from '../../middlewares/promiseMiddleware';
+
 
 const NEXT = 'bemy-app/test/NEXT';
 const QUESTIONS = 'bemy-app/test/QUESTIONS';
@@ -25,7 +26,6 @@ const initialState = {
   currentQuestionIndex: 0,
   answers: [],
 };
-
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -146,6 +146,37 @@ export default (state = initialState, action) => {
       };
     }
 
+    case getAsyncType(QUESTIONS, SUCCESS): {
+      console.log(action);
+      // console.log(action.res.body.toString());
+      if (action.res.status === 204) {
+        return { ...state, isUserHaveAnswers: true };
+      }
+      if (action.res.status === 200) {
+        const isUserHaveAnswers = false;
+        const allQuestions = action.res.data;
+        const questionsTypes = [];
+        allQuestions.forEach(question => {
+          if (questionsTypes.indexOf(question.socionicType) === -1) {
+            questionsTypes.push(question.socionicType);
+          }
+        });
+        const displayedQuestions = allQuestions
+          .filter(question =>
+            question.socionicType === questionsTypes[state.currentQuestionIndex]);
+        return { ...state,
+          isUserHaveAnswers,
+          allQuestions,
+          displayedQuestions,
+          questionsTypes,
+          currentQuestion: displayedQuestions[Math.floor(Math.random() * displayedQuestions.length)]
+        };
+        // action.res.body.json().then(data => console.log(data));
+        // console.log(action.res.body.tee());
+      }
+      return state;
+    }
+
     default: {
       return state;
     }
@@ -220,25 +251,11 @@ export const postAnswers = payload => {
    };
 };
 
-// export function postAnswers(payload) {
-//   return (dispatch) => {
-//     const result = [...payload.result, { question: payload.currentQuestion._id, answers: payload.answers}];
-//     // console.log(result);
-//     // const headers = new Headers();
-//     // headers.append('Content-Type', 'application/json');
-//     fetch('/api/answer/', {
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       // headers,
-//       method: 'post',
-//       body: JSON.stringify({ answers: result }),
-//       credentials: 'include'
-//     })
-//       .catch(error => console.log(error));
-//     dispatch(renewQuestions());
-//     dispatch({ type: USERANSWER, payload: true });
-//   };
-// }
+export const initTest = () => {
+  return {
+    type: QUESTIONS,
+    promise: request.get('/api/init', { withCredentials: true })
+  };
+};
+
 

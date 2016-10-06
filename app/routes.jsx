@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import ReactRedirect from 'react-redirect';
-import fetch from 'isomorphic-fetch';
+import request from 'axios';
+
 
 import App from './containers/App';
 import InvitationContainer from './containers/InvitationContainer';
@@ -9,7 +10,7 @@ import HelloContainer from './containers/HelloContainer';
 import TestBeginContainer from './containers/TestBeginContainer';
 import TestContainer from './containers/TestContainer';
 import ResultContainer from './containers/ResultContainer';
-import * as testActions from './redux/modules/test';
+import { initTest } from './redux/modules/test';
 // import PeopleContainer from './containers/PeopleContainer';
 // import ProfileContainer from './containers/ProfileContainer';
 // import MailContainer from './containers/MailContainer';
@@ -21,7 +22,6 @@ import * as testActions from './redux/modules/test';
  * state from the store after it has been authenticated.
  */
 export default (store) => {
-  const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
   const requireAuth = (nextState, replace, callback) => {
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
@@ -53,42 +53,28 @@ export default (store) => {
   };
 
   const requireNewUser = (nextState, replace, callback) => {
-    // console.log(testActions);
-    if (store.getState().test.isUserHaveAnswers) {
+    const isUserHaveAnswers = store.getState().test.isUserHaveAnswers;
+    if (isUserHaveAnswers) {
       replace('/result');
       callback();
-    }
-    if (canUseDOM) {
-      const test = store.getState().test;
-      requireAuth(nextState, replace, callback);
-      if (test.isUserHaveAnswers === undefined) {
-        // store.dispatch({
-        //   type: 'bemy-app/test/QUESTIONS',
-        //   promise: fetch('/api/init', { credentials: 'include' })
-        // }).then(em => console.log(em));
-        fetch('/api/init', { credentials: 'include' })
-        .then(response => {
-          // console.log(response);
-          if (response.status === 204) {
-            store.dispatch(testActions.setUserAnswer(true));
+    } else if (isUserHaveAnswers === undefined) {
+      store.dispatch(initTest())
+        .then(() => {
+          if (store.getState().test.isUserHaveAnswers) {
             replace('/result');
             callback();
           }
-          if (response.status === 200) {
-            response.json()
-              .then(data => {
-                // console.log(data);
-                store.dispatch(testActions.setUserAnswer(false));
-                store.dispatch(testActions.setQuestionsByTypeAC(data));
-                callback();
-              })
-              .catch(parseError => console.log(parseError));
-          }
-        })
-        .catch(error => console.log(error));
-      } else {
-        callback();
-      }
+        });
+      // store.dispatch({
+      //   type: 'bemy-app/test/QUESTIONS',
+      //   promise: request.get('/api/init', { withCredentials: true })
+      //   // promise: fetch('/api/init', { credentials: 'include' })
+      // }).then(() => {
+      //   if (store.getState().test.isUserHaveAnswers) {
+      //     replace('/result');
+      //     callback();
+      //   }
+      // });
     }
     callback();
   };
