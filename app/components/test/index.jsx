@@ -1,19 +1,22 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import BemyButton from '../button';
 import styles from './main.scss';
-// import { socionicQuestions } from '../../external/harmony';
-
-require('./animation.css');
-
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
+import animation from './animation.css';
 
 const TestComponent = props => {
   const { test, actions } = props;
   const length = test.questionsTypes ? test.questionsTypes.length : 0;
   return (
     <ReactCSSTransitionGroup
-      transitionName="test"
+      transitionName={{
+        enter: 'enter',
+        enterActive: 'enterActive',
+        leave: 'leave',
+        leaveActive: 'leaveActive',
+        appear: animation.appear,
+        appearActive: animation.appearActive
+      }}
       transitionAppear
       transitionEnter={false}
       transitionLeave={false}

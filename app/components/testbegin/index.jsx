@@ -1,19 +1,26 @@
 
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import BemyButton from '../button';
-
 // import ReactDOM from 'react-dom';
 import styles from './main.scss';
+import animation from './animation.css';
 
-require('./animation.css');
 
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+// const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 
 const TestBeginComponent = () => {
   return (
     <ReactCSSTransitionGroup
-      transitionName="testbegin"
+      transitionName={{
+        enter: 'enter',
+        enterActive: 'enterActive',
+        leave: 'leave',
+        leaveActive: 'leaveActive',
+        appear: animation.appear,
+        appearActive: animation.appearActive
+      }}
       transitionAppear
       transitionEnter={false}
       transitionLeave={false}
@@ -33,9 +40,6 @@ const TestBeginComponent = () => {
             title="начать тест"
           />
         </footer>
-        {/* <button onClick={this.props.actions.changeView}>
-          НАЧАТЬ ТЕСТ
-        </button> */}
       </section>
     </ReactCSSTransitionGroup>
 

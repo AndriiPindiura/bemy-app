@@ -50,10 +50,10 @@ module.exports = {
     },
     module: {
       loaders: commonLoaders.concat([
-           {
+          {
             test: /\.css$/,
             loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]'
-           },
+          },
           {
             test: /\.scss$/,
             loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader!postcss-loader?parser=postcss-scss'

@@ -1,6 +1,6 @@
 import React from 'react';
 import deepFreeze from 'deep-freeze';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import BemyButton from '../button';
 import styles from './main.scss';
 
@@ -8,7 +8,8 @@ const ProfileComponent = props => {
   // componentDidMount() {
   //   ReactDOM.findDOMNode(this).scrollIntoView();
   // }
-  const human = props.harmony.selectedHuman;
+  console.log(props);
+  const human = props.people.selectedHuman;
   deepFreeze(props.people);
   const people = [...props.people.people];
   people.splice(4, people.length - 5);

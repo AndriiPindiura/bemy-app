@@ -1,40 +1,6 @@
-import React, { PropTypes } from 'react';
-// import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import Helmet from 'react-helmet';
 import ResultComponent from '../components/result';
-
-
-// class InvitationContainer extends React.Component {
-//   render() {
-//     console.log(InvitationComponent);
-//     return (<InvitationComponent />);
-//     // return (
-//     //   <InvitationComponent
-//     //     actions={this.props.fbActions}
-//     //     // viewActions={props.viewActions}
-//     //     invitationActions={this.props.invitationActions}
-//     //     facebook={this.props.facebook}
-//     //     invitation={this.props.invitation}
-//     //   />
-//     // );
-//   }
-// }
-
-const ResultContainer = () => {
-  return (
-    <div>
-      <ResultComponent />
-    </div>
-  );
-};
-
-
-ResultContainer.propTypes = {
-  // facebook: PropTypes.object.isRequired,
-  // people: PropTypes.object.isRequired,
-};
 
 function mapStateToProps(state) {
   /* Populated by react-webpack-redux:reducer */
@@ -54,4 +20,4 @@ function mapDispatchToProps(dispatch) {
     // invitationActions: bindActionCreators(invitationActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ResultContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultComponent);

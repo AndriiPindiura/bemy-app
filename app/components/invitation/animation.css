@@ -1,10 +1,10 @@
-.invitation-appear {
+.appear {
   position: relative;
   left: -100%;
   /*opacity: 0.01;*/
 }
 
-.invitation-appear.invitation-appear-active {
+.appearActive {
   left: 0;
   /*opacity: 1;*/
   transition: left .4s;

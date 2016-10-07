@@ -1,8 +1,8 @@
-.test-appear {
+.appear {
   opacity: 0.01;
 }
 
-.test-appear.test-appear-active {
+.appearActive {
   opacity: 1;
   transition: opacity .8s ease-in;
 }

@@ -4,7 +4,7 @@ import BemyButton from '../button';
 import styles from './main.scss';
 
 const MailComponent = props => {
-  const human = props.harmony.selectedHuman;
+  const human = props.people.selectedHuman;
   return (
     <section className={styles.mail}>
       <header>

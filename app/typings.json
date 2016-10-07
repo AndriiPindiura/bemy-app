@@ -1,0 +1,15 @@
+{
+  "globalDependencies": {
+    "express": "registry:dt/express#4.0.0+20160708185218",
+    "node": "registry:dt/node#6.0.0+20160928143418",
+    "passport": "registry:dt/passport#0.2.0+20161002083745",
+    "passport-facebook": "registry:dt/passport-facebook#1.0.3+20160316155526",
+    "passport-jwt": "registry:dt/passport-jwt#2.0.0+20160330163949",
+    "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
+    "passport-strategy": "registry:dt/passport-strategy#0.2.0+20160316155526",
+    "react": "registry:dt/react#0.14.0+20160927082313",
+    "react-redux": "registry:dt/react-redux#4.4.0+20160908183346",
+    "react-router": "registry:dt/react-router#2.0.0+20160928130202",
+    "redux": "registry:dt/redux#3.5.2+20160703092728"
+  }
+}

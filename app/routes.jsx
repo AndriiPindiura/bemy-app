@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import ReactRedirect from 'react-redirect';
-import request from 'axios';
-
 
 import App from './containers/App';
 import InvitationContainer from './containers/InvitationContainer';
@@ -11,10 +9,11 @@ import TestBeginContainer from './containers/TestBeginContainer';
 import TestContainer from './containers/TestContainer';
 import ResultContainer from './containers/ResultContainer';
 import { initTest } from './redux/modules/test';
-// import PeopleContainer from './containers/PeopleContainer';
-// import ProfileContainer from './containers/ProfileContainer';
-// import MailContainer from './containers/MailContainer';
-// import AccountContainer from './containers/AccountContainer';
+
+import PeopleContainer from './containers/PeopleContainer';
+import ProfileContainer from './containers/ProfileContainer';
+import MailContainer from './containers/MailContainer';
+import AccountContainer from './containers/AccountContainer';
 
 /*
  * @param {Redux Store}
@@ -45,9 +44,18 @@ export default (store) => {
 
   const requireTestPassed = (nextState, replace, callback) => {
     requireAuth(nextState, replace, callback);
-    if (!store.getState().test.isUserHaveAnswers) {
+    const isUserHaveAnswers = store.getState().test.isUserHaveAnswers;
+    if (!isUserHaveAnswers) {
       replace('/test');
       callback();
+    } else if (isUserHaveAnswers === undefined) {
+      store.dispatch(initTest())
+        .then(() => {
+          if (store.getState().test.isUserHaveAnswers) {
+            // replace('/result');
+            callback();
+          }
+        });
     }
     callback();
   };
@@ -65,16 +73,6 @@ export default (store) => {
             callback();
           }
         });
-      // store.dispatch({
-      //   type: 'bemy-app/test/QUESTIONS',
-      //   promise: request.get('/api/init', { withCredentials: true })
-      //   // promise: fetch('/api/init', { credentials: 'include' })
-      // }).then(() => {
-      //   if (store.getState().test.isUserHaveAnswers) {
-      //     replace('/result');
-      //     callback();
-      //   }
-      // });
     }
     callback();
   };
@@ -94,11 +92,11 @@ export default (store) => {
       <Route path="testbegin" component={TestBeginContainer} onEnter={requireAuth} />
       <Route path="test" component={TestContainer} onEnter={requireNewUser} />
       <Route path="result" component={ResultContainer} onEnter={requireTestPassed} />
-      {/*
-        <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
+      <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
       <Route path="profile" component={ProfileContainer} onEnter={requireTestPassed} />
       <Route path="mail" component={MailContainer} onEnter={requireTestPassed} />
       <Route path="me" component={AccountContainer} onEnter={requireAuth} />
+      {/*
       */}
     </Route>
   );

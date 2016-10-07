@@ -1,18 +1,24 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import BemyButton from '../button';
 import styles from './main.scss';
-
-require('./animation.css');
+import animation from './animation.css';
 
 // let ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const InvitationComponent = (props) => {
   const { invitation, facebook } = props;
   return (
     <ReactCSSTransitionGroup
-      transitionName="invitation"
+      transitionName={{
+        enter: 'enter',
+        enterActive: 'enterActive',
+        leave: 'leave',
+        leaveActive: 'leaveActive',
+        appear: animation.appear,
+        appearActive: animation.appearActive
+      }}
       transitionAppear
       transitionEnter={false}
       transitionLeave={false}
@@ -48,9 +54,6 @@ const InvitationComponent = (props) => {
           <footer>
             <BemyButton to="/hello" title="НАЧАТЬ ПОИСК" enabled />
           </footer>
-          {/* <button onClick={this.props.viewActions.changeView}>
-            ДА
-          </button> */}
         </div>
       </section>
     </ReactCSSTransitionGroup>
@@ -61,7 +64,6 @@ InvitationComponent.displayName = 'InvitationComponent';
 
 // Uncomment properties you need
 InvitationComponent.propTypes = {
-  actions: React.PropTypes.object.isRequired,
   facebook: React.PropTypes.object.isRequired,
   invitation: React.PropTypes.object.isRequired,
 };

@@ -8,7 +8,6 @@ const QUESTIONS = 'bemy-app/test/QUESTIONS';
 const ANSWER = 'bemy-app/test/ANSWER';
 const CURRENT_QUESTION = 'bemy-app/test/CURRENT_QUESTION';
 const USERANSWER = 'bemy-app/test/USERANSWER';
-const QUESTIONSTYPES = 'bemy-app/test/QUESTIONSTYPES';
 const POST = 'bemy-app/test/POST';
 const SUCCESS = '_SUCCESS';
 const REQUEST = '_REQUEST';
@@ -101,32 +100,6 @@ export default (state = initialState, action) => {
       return state;
     }
 
-    case QUESTIONS: {
-      deepFreeze(state);
-      // console.log(action.payload);
-      // const questions = [...action.payload];
-      const allQuestions = [...action.payload];
-      const questionsTypes = [];
-      allQuestions.forEach(question => {
-        if (questionsTypes.indexOf(question.socionicType) === -1) {
-          questionsTypes.push(question.socionicType);
-        }
-      });
-      const displayedQuestions = allQuestions
-        .filter(question =>
-          question.socionicType === questionsTypes[state.currentQuestionIndex]);
-      return { ...state,
-        allQuestions,
-        displayedQuestions,
-        questionsTypes,
-        currentQuestion: displayedQuestions[Math.floor(Math.random() * displayedQuestions.length)]
-      };
-    }
-
-    case QUESTIONSTYPES: {
-      return { ...state, questionsTypes: action.payload };
-    }
-
     case CURRENT_QUESTION: {
       deepFreeze(state);
       const index = state.displayedQuestions.indexOf(state.currentQuestion);
@@ -148,7 +121,6 @@ export default (state = initialState, action) => {
 
     case getAsyncType(QUESTIONS, SUCCESS): {
       console.log(action);
-      // console.log(action.res.body.toString());
       if (action.res.status === 204) {
         return { ...state, isUserHaveAnswers: true };
       }
@@ -171,8 +143,6 @@ export default (state = initialState, action) => {
           questionsTypes,
           currentQuestion: displayedQuestions[Math.floor(Math.random() * displayedQuestions.length)]
         };
-        // action.res.body.json().then(data => console.log(data));
-        // console.log(action.res.body.tee());
       }
       return state;
     }
@@ -199,34 +169,9 @@ export function setQuestionsByTypeAC(payload) {
   return { type: QUESTIONS, payload };
 }
 
-// export function setQuestionsByType(parameter) {
-//   return (dispatch) => {
-//     fetch(`/api/question/type/${parameter}`, { credentials: 'include' })
-//       .then(response => {
-//         response.json().then(data => {
-//           dispatch(setQuestionsByTypeAC(data));
-//         }).catch(err => console.log(err));
-//       })
-//       .catch(error => {
-//         console.log(error);
-//       });
-//   };
-// }
-
 export const setUserAnswer = payload => {
   return { type: USERANSWER, payload };
 };
-
-// export function nextQuestion(parameter) {
-//   return (dispatch) => {
-//     dispatch(setQuestionsByType(parameter + 1));
-//     dispatch(nextQuestionAC());
-//   };
-// }
-
-// export function renewQuestions(payload) {
-//   return { type: RENEW, payload };
-// }
 
 const post = payload => {
    return {
@@ -247,7 +192,6 @@ export const postAnswers = payload => {
    const result = [...payload.result, { question: payload.currentQuestion._id, answers: payload.answers}];
    return (dispatch) => {
      dispatch(post(result));
-    //  browserHistory.push('/result');
    };
 };
 

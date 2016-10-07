@@ -1,10 +1,10 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import BemyButton from '../button';
 import styles from './main.scss';
+import animation from './animation.css';
 
-require('./animation.css');
-
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+// const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class HelloComponent extends React.Component {
   constructor(props) {
@@ -12,19 +12,8 @@ class HelloComponent extends React.Component {
     this.state = {
       buttonEnable: false,
     };
-    // this.loginClick = this.loginClick.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
   }
 
-  // loginClick(e) {
-  //   e.preventDefault();
-  //   const { firstName } = this.props.facebook;
-  //   if (firstName === 'Вход') {
-  //     this.props.fbActions.login();
-  //   } else {
-  //     this.props.actions.changeView();
-  //   }
-  // }
   handleChange(e) {
     this.setState({ buttonEnable: e.target.checked });
   }
@@ -33,7 +22,14 @@ class HelloComponent extends React.Component {
     // return <div>hello</div>;
     return (
       <ReactCSSTransitionGroup
-        transitionName="hello"
+        transitionName={{
+          enter: 'enter',
+          enterActive: 'enterActive',
+          leave: 'leave',
+          leaveActive: 'leaveActive',
+          appear: animation.appear,
+          appearActive: animation.appearActive
+        }}
         transitionAppear
         transitionEnter={false}
         transitionLeave={false}
@@ -49,18 +45,6 @@ class HelloComponent extends React.Component {
             <div>
               <input type="checkbox" id="agree" onChange={e => { this.setState({ buttonEnable: e.target.checked }); }} />
               <label htmlFor="agree">Да, я готов к отношениям</label>
-              {/* <Link
-                className={!this.state.buttonEnable ? styles.disabled : ''}
-                to="/testbegin"
-                onClick={!this.state.buttonEnable ? e => {
-                  e.preventDefault();
-                } : () => { browserHistory.push('/testbegin'); }}
-              >
-                {this.props.facebook.firstName ? 'ДАЛЕЕ' : 'ВОЙТИ ЧЕРЕЗ FACEBOOK' }
-              </Link>*/}
-              {/* <button type="button" onClick={() => this.props.actions.login(this.props.facebook.firstName)} disabled={!this.state.buttonEnable}>
-                {(this.props.facebook.firstName === 'Вход') ? 'ВОЙТИ ЧЕРЕЗ FACEBOOK' : 'ДАЛЕЕ'}
-              </button> */}
             </div>
             <footer>
               <BemyButton
@@ -81,7 +65,6 @@ HelloComponent.displayName = 'HelloComponent';
 // Uncomment properties you need
 HelloComponent.propTypes = {
   facebook: React.PropTypes.object.isRequired,
-  fbActions: React.PropTypes.object.isRequired,
   // actions: React.PropTypes.object.isRequired,
 };
 // HelloComponent.defaultProps = {};
