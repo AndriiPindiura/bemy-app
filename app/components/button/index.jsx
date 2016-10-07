@@ -3,7 +3,10 @@ import { Link, browserHistory } from 'react-router';
 import styles from './main.scss';
 
 const BemyButtonComponent = (props) => {
-  const callback = props.action ? e => props.action(e) : () => browserHistory.push(props.to);
+  const callback = props.action ? e => {
+    e.preventDefault();
+    props.action(e);
+  } : () => browserHistory.push(props.to);
   return (
     <nav className={styles.button}>
       <Link

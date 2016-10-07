@@ -8,12 +8,13 @@ import HelloContainer from './containers/HelloContainer';
 import TestBeginContainer from './containers/TestBeginContainer';
 import TestContainer from './containers/TestContainer';
 import ResultContainer from './containers/ResultContainer';
+import ShareComponent from './components/share';
 import { initTest } from './redux/modules/test';
 
-import PeopleContainer from './containers/PeopleContainer';
-import ProfileContainer from './containers/ProfileContainer';
-import MailContainer from './containers/MailContainer';
-import AccountContainer from './containers/AccountContainer';
+// import PeopleContainer from './containers/PeopleContainer';
+// import ProfileContainer from './containers/ProfileContainer';
+// import MailContainer from './containers/MailContainer';
+// import AccountContainer from './containers/AccountContainer';
 
 /*
  * @param {Redux Store}
@@ -43,16 +44,18 @@ export default (store) => {
   // };
 
   const requireTestPassed = (nextState, replace, callback) => {
+    // console.log(nextState);
     requireAuth(nextState, replace, callback);
     const isUserHaveAnswers = store.getState().test.isUserHaveAnswers;
-    if (!isUserHaveAnswers) {
-      replace('/test');
+    if (isUserHaveAnswers) {
       callback();
     } else if (isUserHaveAnswers === undefined) {
       store.dispatch(initTest())
         .then(() => {
           if (store.getState().test.isUserHaveAnswers) {
-            // replace('/result');
+            callback();
+          } else {
+            replace('/test');
             callback();
           }
         });
@@ -84,7 +87,7 @@ export default (store) => {
   const Auth = () => { return <ReactRedirect location="/auth/facebook/" />; };
 
   return (
-    <Route path="/" component={App}>
+    <Route path="/" component={App} onChange={() => window.scrollTo(0, 0)}>
       <IndexRoute component={InvitationContainer} />
       <Route path="auth/facebook/:callback" component={AuthWithParams} />
       <Route path="auth/facebook/" component={Auth} />
@@ -92,11 +95,12 @@ export default (store) => {
       <Route path="testbegin" component={TestBeginContainer} onEnter={requireAuth} />
       <Route path="test" component={TestContainer} onEnter={requireNewUser} />
       <Route path="result" component={ResultContainer} onEnter={requireTestPassed} />
+      <Route path="share" component={ShareComponent} onEnter={requireTestPassed} />
+      {/*
       <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
       <Route path="profile" component={ProfileContainer} onEnter={requireTestPassed} />
       <Route path="mail" component={MailContainer} onEnter={requireTestPassed} />
       <Route path="me" component={AccountContainer} onEnter={requireAuth} />
-      {/*
       */}
     </Route>
   );

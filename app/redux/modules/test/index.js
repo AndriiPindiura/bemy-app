@@ -120,7 +120,6 @@ export default (state = initialState, action) => {
     }
 
     case getAsyncType(QUESTIONS, SUCCESS): {
-      console.log(action);
       if (action.res.status === 204) {
         return { ...state, isUserHaveAnswers: true };
       }
@@ -153,16 +152,16 @@ export default (state = initialState, action) => {
   }
 };
 
-export function nextQuestion(payload) {
-  return { type: NEXT, payload };
+export function nextQuestion() {
+  return { type: NEXT };
 }
 
 export function changeAnswer(payload) {
   return { type: ANSWER, payload };
 }
 
-export function setCurrentQuestion(payload) {
-  return { type: CURRENT_QUESTION, payload };
+export function setCurrentQuestion() {
+  return { type: CURRENT_QUESTION };
 }
 
 export function setQuestionsByTypeAC(payload) {

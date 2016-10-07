@@ -5,6 +5,7 @@ const QuestionSchema = new Schema({
   socionicType: Number,
   isRadio: Boolean,
   answers: Array,
+  enabled: { type: Boolean, default: true }
 });
 
 export default mongoose.model('Question', QuestionSchema);

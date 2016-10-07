@@ -37,7 +37,7 @@ export const appinit = (req, res) => {
       if (user) {
         return res.sendStatus(204);
       }
-      return Question.find()
+      return Question.find({ enabled: true })
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));

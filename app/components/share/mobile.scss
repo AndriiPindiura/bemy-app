@@ -1,0 +1,32 @@
+& {
+  min-height: 100vh;
+  padding: px(51.2) 0 0;
+  // background: $backgroundColor;
+  @include gradientBorder(5px, 0);
+  color: $headerColor;
+
+  h2 {
+    margin: 0 px(51.2) px(30.72);
+    color: #414c53;
+    font-family: Lato-Light;
+    font-size: px(40.96);
+    font-weight: 100;
+    font-style: italic;
+    line-height: px(68.26);
+  }
+
+  p {
+    flex-grow: 2;
+    margin: 0 px(60);
+    color: #000;
+    font-family: Lato-Light;
+    font-size: px(27.3);
+    font-weight: 100;
+    letter-spacing: 0px;
+    line-height: px(37.55);
+  }
+  nav {
+    padding: px(63.15) px(42.66) px(23.89);
+  }
+
+}

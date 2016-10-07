@@ -1,3 +1,4 @@
+import { appId, appSecret } from './local';
 /** Important **/
 /** You should not be committing this file to GitHub **/
 /** Repeat: DO! NOT! COMMIT! THIS! FILE! TO! YOUR! REPO! **/
@@ -9,8 +10,8 @@ export const google = {
 };
 
 export const facebook = {
-  clientID: process.env.FACEBOOK_CLIENTID || '258087497891910',
-  clientSecret: process.env.FACEBOOK_SECRET || '6987c9a165512f957da951f74a929246',
+  clientID: process.env.FACEBOOK_CLIENTID || appId,
+  clientSecret: process.env.FACEBOOK_SECRET || appSecret,
   callbackURL: process.env.FACEBOOK_CALLBACK || '/auth/facebook/callback',
   profileFields: [
     'id',
