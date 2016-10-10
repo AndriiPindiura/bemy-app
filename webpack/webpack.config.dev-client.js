@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var styleLintPlugin = require('stylelint-webpack-plugin');
 var assetsPath = path.join(__dirname, '..', 'public', 'assets');
 var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+// var CompressionPlugin = require('compression-webpack-plugin');
 
 var commonLoaders = [
   {
@@ -100,6 +101,13 @@ module.exports = {
       extensions: ['', '.js', '.jsx', '.css'],
     },
     plugins: [
+        // new CompressionPlugin({
+        //   asset: "[path].gz[query]",
+        //   algorithm: "gzip",
+        //   test: /\.js$|\.html$/,
+        //   threshold: 10240,
+        //   minRatio: 0.8
+        // }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({

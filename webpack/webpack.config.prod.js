@@ -2,6 +2,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var InlineEnviromentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
 var webpack = require('webpack');
+// var CompressionPlugin = require('compression-webpack-plugin');
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets');
 var publicPath = '/assets/';
@@ -104,6 +105,13 @@ module.exports = [
       extensions: ['', '.js', '.jsx', '.css']
     },
     plugins: [
+        // new CompressionPlugin({
+        //   asset: "[path].gz[query]",
+        //   algorithm: "gzip",
+        //   test: /\.js$|\.html$/,
+        //   threshold: 10240,
+        //   minRatio: 0.8
+        // }),
         // extract inline css from modules into separate files
         new ExtractTextPlugin('styles/main.css', { allChunks: true }),
         new webpack.optimize.UglifyJsPlugin({
