@@ -9,6 +9,7 @@
 
 import _ from 'lodash';
 import Answer from '../models/answer';
+import User from '../models/user';
 // import User from '../models/user';
 // import Question from '../models/question';
 
@@ -87,16 +88,10 @@ export function create(req, res) {
   const answer = new Answer();
   answer.user = req.user._id;
   answer.answers = req.body.answers;
-  // console.log(answer);
+  // console.log(answer.answers);
   return answer.save()
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
-  // return Answer.create({
-  //   userId: req.user._id,
-  //   answers: req.body.answers
-  // })
-  //   .then(respondWithResult(res, 201))
-  //   .catch(handleError(res));
 }
 
 // Updates an existing Answer in the DB

@@ -2,14 +2,14 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import ReactRedirect from 'react-redirect';
 
+import { initTest } from './redux/modules/test';
 import App from './containers/App';
 import InvitationContainer from './containers/InvitationContainer';
 import HelloContainer from './containers/HelloContainer';
 import TestBeginContainer from './containers/TestBeginContainer';
 import TestContainer from './containers/TestContainer';
 import ResultContainer from './containers/ResultContainer';
-import ShareComponent from './components/share';
-import { initTest } from './redux/modules/test';
+import ShareComponent from './containers/ShareContainer';
 
 // import PeopleContainer from './containers/PeopleContainer';
 // import ProfileContainer from './containers/ProfileContainer';
@@ -96,6 +96,7 @@ export default (store) => {
       <Route path="test" component={TestContainer} onEnter={requireNewUser} />
       <Route path="result" component={ResultContainer} onEnter={requireTestPassed} />
       <Route path="share" component={ShareComponent} onEnter={requireTestPassed} />
+      <Route path="/:id" component={InvitationContainer} />
       {/*
       <Route path="people" component={PeopleContainer} onEnter={requireTestPassed} />
       <Route path="profile" component={ProfileContainer} onEnter={requireTestPassed} />

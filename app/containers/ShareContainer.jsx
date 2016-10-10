@@ -1,12 +1,13 @@
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import ResultComponent from '../components/result';
+// import * as fbActions from '../actions/facebook';
+// import * as invitationActions from '../actions/invitation';
+import ShareComponent from '../components/share';
 
 function mapStateToProps(state) {
   /* Populated by react-webpack-redux:reducer */
   const props = {
     facebook: state.facebook,
-    // people: state.listpeople,
   };
   return props;
 }
@@ -17,7 +18,8 @@ function mapDispatchToProps(dispatch) {
   // return actionMap;
   return {
     // fbActions: bindActionCreators(fbActions, dispatch),
+    // viewActions: bindActionCreators(viewActions, dispatch),
     // invitationActions: bindActionCreators(invitationActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ResultComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ShareComponent);

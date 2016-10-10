@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router';
 import BemyButton from '../button';
 import styles from './main.scss';
 
 const ResultComponent = props => {
+  console.log(props.facebook);
   return (
     <section className={styles.result}>
       <main>
@@ -13,7 +13,7 @@ const ResultComponent = props => {
         <h3>Что дальше?</h3>
         <p>Пока у нас недостаточно анкет, чтобы запустить сервис. Ведь вы не хотите видеть 5 анкет? Сейчас мы активно работаем, чтобы увеличить количество людей, которые хотят настоящих отношений.</p>
         <p>Оставьте ваш електронный адрес и мы сообщим вам о запуске сервиса:</p>
-        <input type="email" placeholder="email" />
+        <input type="email" placeholder="email" value={props.facebook.email || ''} />
       </main>
       <footer>
         <BemyButton

@@ -37,7 +37,7 @@ const ShareComponent = props => {
           () => {
             FB.ui({
               method: 'share',
-              href: 'http://bemy.com.ua',
+              href: `http://bemy.com.ua/${props._id}`,
             }, (response) => console.log(response));
           }
         }

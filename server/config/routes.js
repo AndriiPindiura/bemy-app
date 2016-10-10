@@ -144,6 +144,7 @@ export default (app) => {
     app.get('/api/question/:id', questionController.show);
     app.post('/api/question/', requireRole('admin'), questionController.create);
     app.post('/api/question/import', requireRole('admin'), questionController.upload);
+    // app.post('/api/question/import', questionController.upload);
     app.put('/api/question/:id', requireRole('admin'), questionController.update);
     app.patch('/api/question/:id', requireRole('admin'), questionController.update);
     // app.delete('/api/question/wipe', questionController.wipe);

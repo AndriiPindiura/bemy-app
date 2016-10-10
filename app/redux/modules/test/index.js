@@ -1,5 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import request from 'axios';
+import { browserHistory } from 'react-router';
 import { getAsyncType } from '../../middlewares/promiseMiddleware';
 
 
@@ -183,7 +184,7 @@ const post = payload => {
       method: 'post',
       body: JSON.stringify({ answers: payload }),
       credentials: 'include'
-     })
+     }).then(browserHistory.push('/result'))
    };
 };
 
