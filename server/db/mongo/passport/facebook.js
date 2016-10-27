@@ -8,6 +8,9 @@ export default (req, accessToken, refreshToken, profile, done) => {
   // https://graph.facebook.com/me/picture?type=large&access_token=258087497891910|9EL3sJQzT-tmCNO14CfqR-mJVYs
   // https://graph.facebook.com/905606882896053/picture?type=large&access_token=258087497891910|9EL3sJQzT-tmCNO14CfqR-mJVYs
   // https://graph.facebook.com/oauth/access_token?client_id=258087497891910&client_secret=6987c9a165512f957da951f74a929246&grant_type=client_credentials&redirect_uri=http://example.com/&scope=<comma-separated-list-of-permissions>
+  console.log(accessToken);
+  console.log(refreshToken);
+  console.log(req);
   const profileToUser = {
     email: profile.emails ? profile.emails[0].value : null,
     tokens: [],

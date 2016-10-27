@@ -11,7 +11,7 @@ import header from './components/Meta';
 
 const clientConfig = {
   host: process.env.HOSTNAME || 'localhost',
-  port: process.env.PORT || '3000'
+  port: process.env.PORT || '7080'
 };
 
 // configure baseURL for axios requests (for serverside API calls)
